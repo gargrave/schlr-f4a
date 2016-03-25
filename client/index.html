@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="schlr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foundation for Apps</title>
+
+  <link rel="stylesheet" href="./assets/css/app.css" type="text/css">
+  <link rel="stylesheet" href="./assets/css/schlr.css" type="text/css">
+
+</head>
+<body>
+<div class="grid-frame vertical">
+
+  <div class="grid-content shrink" style="padding: 0;">
+    <ul class="primary condense menu-bar">
+      <li><a><strong>Foundation for Apps</strong></a></li>
+    </ul>
+  </div>
+
+  <div ui-view class="grid-content">
+  </div>
+
+</div>
+
+<!-- DEV_SCRIPTS -->
+<script src="./assets/js/libs/foundation.js"></script>
+<script src="./assets/js/libs/templates.js"></script>
+<script src="./assets/js/libs/routes.js"></script>
+
+<script src="./assets/js/app.js"></script>
+<!-- END_DEV_SCRIPTS -->
+
+<!-- PROD_SCRIPTS -->
+<script src="./assets/js/libs/foundation.js"></script>
+<script src="./assets/js/libs/templates.js"></script>
+<script src="./assets/js/libs/routes.js"></script>
+<!-- END_PROD_SCRIPTS -->
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "removeComments": true,
+    "outDir": "build/assets/js"
+  },
+  "exclude": [
+    "bower_components",
+    "node_modules",
+    "platforms",
+    "typings"
+  ]
+}
