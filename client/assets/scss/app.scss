@@ -1,2 +1,112 @@
 @import "settings";
 @import "foundation";
+
+$primaryMed: rgba($primary-color, .8);
+$primaryLight: rgba($primary-color, .5);
+$primaryLightMed: rgba($primary-color, .25);
+$primaryExtraLight: rgba($primary-color, .15);
+
+$border: 1px solid $primaryExtraLight;
+$text-muted: #878787;
+
+/*======================================
+ = Bootstrap mocks
+ ======================================*/
+.alert-error {
+  border: 1px solid #e8baba;
+  border-radius: 2px;
+  margin: 0 0 16px;
+
+  .card-section {
+    color: #a94442;
+    background-color: #f2dede;
+    font-size: 14px;
+  }
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+/*=============================================
+ = F4A overrides
+ =============================================*/
+.card {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+a > {
+  .iconic * {
+    stroke: white;
+  }
+}
+
+.block-list {
+  li:first-child {
+    border-top: 0;
+  }
+  li {
+    border-bottom: $border;
+  }
+}
+
+/*=============================================
+ = custom styles
+ =============================================*/
+.validation-error {
+  color: red;
+  margin-bottom: 30px;
+}
+
+.block-list-content {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.main-menu-active {
+  background-color: $primaryExtraLight;
+  //box-shadow: inset 0 0 1px $primaryLight;
+}
+
+.card-basic {
+  margin: 6px 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(1, 1, 1, 0.2);
+}
+
+.grid-content-main {
+  background-color: #f1f1f1;
+  .card {
+    @extend .card-basic;
+    border: 1px solid #e6e6e6;
+  }
+}
+
+.content-subtitle {
+  @extend .card-basic;
+  border-radius: 0;
+  margin: 10px 0;
+  background-color: $primaryLight;
+  color: white;
+}
+
+.content-subtitle-first {
+  @extend .content-subtitle;
+  margin-top: 0;
+}
+
+.entries-title-bar {
+  background-color: $primaryMed;
+  color: white;
+  border: 0;
+  a {
+    color: white;
+  }
+}
+
+#left-menu {
+  border-right: $border;
+  box-shadow: 0 1px 5px rgba(1, 1, 1, 0.1);
+}

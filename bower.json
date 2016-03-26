@@ -23,6 +23,10 @@
     "tests"
   ],
   "dependencies": {
-    "foundation-apps": "~1.2.0"
+    "foundation-apps": "~1.2.0",
+    "lodash": "^4.6.1",
+    "angular-cookies": "^1.5.3",
+    "angular-messages": "^1.5.3",
+    "angular-cache": "^4.5.0"
   }
 }

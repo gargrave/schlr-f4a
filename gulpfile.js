@@ -193,7 +193,7 @@ gulp.task('dist', function(cb) {
 // Default task: builds your app, starts a server, and recompiles assets when they change
 gulp.task('default', function() {
   // Watch Sass
-  // gulp.watch('./client/assets/scss/**/*', ['sass']);
+  gulp.watch('./client/assets/scss/**/*', ['sass']);
 
   // Watch JavaScript
   // gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app']);

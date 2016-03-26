@@ -1,0 +1,46 @@
+<!-- ngMessages templates -->
+<script type="text/ng-template" id="error-messages">
+  <div ng-message="required">This field is required.</div>
+  <div ng-message="minlength">Must be at least 3 characters long.</div>
+  <div ng-message="email">Must be a valid email address</div>
+</script>
+
+<!-- error message display (i.e. server errors) -->
+<div class="alert-error" ng-if="vm.error">
+  <div class="card-section" ng-bind="::vm.error">
+  </div>
+</div>
+
+<form method="POST" id="entryForm" name="entryForm" ng-submit="vm.login(entryForm)" novalidate>
+
+  <!-- email input -->
+  <label>
+    Email address:
+    <input id="email" name="email" type="email"
+           ng-model="vm.email" placeholder="email" required>
+  </label>
+  <!-- email validation messages -->
+  <div role="alert" class="validation-error"
+       ng-messages="entryForm.email.$error"
+       minlength="3" maxlength="50"
+       ng-show="entryForm.$submitted && entryForm.email.$invalid">
+    <div ng-messages-include="error-messages"></div>
+  </div>
+
+
+  <!-- password input -->
+  <label>
+    Password:
+    <input id="password" name="password" type="password"
+           ng-model="vm.password" placeholder="password" required>
+  </label>
+  <!-- password validation messages -->
+  <div role="alert" class="validation-error"
+       ng-messages="entryForm.password.$error"
+       minlength="3" maxlength="30"
+       ng-show="entryForm.$submitted && entryForm.password.$invalid">
+    <div ng-messages-include="error-messages"></div>
+  </div>
+
+  <button type="submit" class="button">Submit</button>
+</form>

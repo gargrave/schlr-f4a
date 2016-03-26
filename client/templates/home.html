@@ -1,9 +1,16 @@
 ---
 name: home
 url: /
+abstract: true
 ---
 
-<div class="grid-container">
-  <h1>Welcome to Foundation for Apps!</h1>
-  <p class="lead">This is version <strong>1.2 Eiger</strong>.</p>
-</div>
+<!-- left panel -->
+<div zf-panel position="left" id="left-menu"
+     class="fast bounceInOut medium-2 medium-grid-content">
+  <div ng-include="'./templates/main-menu-panel.html'"></div>
+</div><!-- /left panel -->
+
+<!-- main panel -->
+<div class="small-12 medium-10 grid-content grid-content-main" style="padding: 0;">
+  <div ui-view></div>
+</div><!-- /main panel -->
