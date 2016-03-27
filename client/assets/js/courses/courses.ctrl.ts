@@ -37,7 +37,7 @@ module schlr.courses {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'AlertsSvc', 'CoursesSvc',
+      'AuthSvc', 'CoursesSvc',
       'MainSvc', 'TermsSvc', 'ApiUpdaterSvc'
     ];
 
@@ -73,7 +73,7 @@ module schlr.courses {
       this.clearEntry();
       this.termsSvc.query()
         .then((res) => {
-          this.termsForSelect = res;
+          this.termsForSelect = _.orderBy(res, 'startDate', 'desc');
           this.entry.term = this.termsForSelect[0];
           this.working = false;
         });
@@ -83,7 +83,7 @@ module schlr.courses {
       this.termsSvc.query()
         .then((res) => {
           this.findOne();
-          this.termsForSelect = res;
+          this.termsForSelect = _.orderBy(res, 'startDate', 'desc');
           this.working = false;
         });
     }

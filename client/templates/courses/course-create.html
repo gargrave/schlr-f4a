@@ -1,13 +1,13 @@
 ---
-name: home.term-create
-url: terms/create
-controller: TermsCtrl as vm
+name: home.course-create
+url: courses/create
+controller: CoursesCtrl as vm
 ---
 
 <div ng-init="vm.initCreateView()">
   <!-- sub-title bar -->
   <div class="title-bar entries-title-bar">
-    <div class="center title">Add a Term</div>
+    <div class="center title">Add a Course</div>
   </div>
 
 
@@ -23,9 +23,9 @@ controller: TermsCtrl as vm
       <div class="card" ng-if="main.isLoggedIn()">
         <div class="card-section">
           <div class="title-bar content-subtitle">
-            <div class="left title">New Term Details</div>
+            <div class="left title">New Course Details</div>
           </div>
-          <div ng-include="'templates/forms/term-form.html'"></div>
+          <div ng-include="'templates/forms/course-form.html'"></div>
         </div>
       </div><!-- /term create form, auth -->
 

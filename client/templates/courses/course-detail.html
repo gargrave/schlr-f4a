@@ -1,27 +1,27 @@
 ---
-name: home.term-detail
-url: terms/detail/:id
-controller: TermsCtrl as vm
+name: home.course-detail
+url: courses/detail/:id
+controller: CoursesCtrl as vm
 ---
 
 <div ng-init="vm.initDetailView()">
   <!-- sub-title bar -->
   <div class="title-bar entries-title-bar">
     <div class="center title">
-      Term Details:
+      Course Details:
       <span ng-bind="vm.entry.name"></span>
     </div>
-    <!-- link back to terms list -->
+    <!-- link back to courses list -->
     <span class="left">
-      <a href="" ui-sref="home.term-list">
+      <a href="" ui-sref="home.course-list">
         <img zf-iconic="" icon="chevron" data-direction="left" size="small"
              class="iconic-color-secondary icon-white">
-        Terms
+        Courses
       </a>
     </span>
-    <!-- link back to edit this term -->
+    <!-- link back to edit this course -->
     <span class="right">
-      <a href="" ui-sref="home.term-update({ id: vm.entry.id })">
+      <a href="" ui-sref="home.course-update({ id: vm.entry.id })">
         Update
       </a>
     </span>
@@ -42,8 +42,8 @@ controller: TermsCtrl as vm
         <div class="card-section">
 
           <p><strong>Title: </strong><span ng-bind="vm.entry.name"></span></p>
-          <p><strong>Starts: </strong><span ng-bind="vm.entry.startDate | date"></span></p>
-          <p><strong>End: </strong><span ng-bind="vm.entry.endDate | date"></span></p>
+          <p><strong>Full name: </strong><span ng-bind="vm.entry.fullName"></span></p>
+          <p><strong>Term: </strong><span ng-bind="vm.entry.term.name"></span></p>
 
         </div>
       </div><!-- /term create form, auth -->
@@ -51,4 +51,3 @@ controller: TermsCtrl as vm
     </div>
   </div>
 </div>
-

@@ -9,10 +9,10 @@ controller: TermsCtrl as vm
   <div class="title-bar entries-title-bar">
     <div class="center title">Terms</div>
     <span class="right">
-    <a href="" ui-sref="home.term-create">
-      <strong>+</strong>
-    </a>
-  </span>
+      <a href="" ui-sref="home.term-create">
+        <strong>Add</strong>
+      </a>
+    </span>
   </div>
 
   <!-- terms list, no-auth -->
@@ -23,7 +23,7 @@ controller: TermsCtrl as vm
   <!-- terms list, auth -->
   <div ng-if="main.isLoggedIn()">
     <!-- term details item -->
-    <div class="card term-list-card" ng-repeat="term in vm.entries | orderBy:'-startDate'"
+    <div class="card list-view-card" ng-repeat="term in vm.entries | orderBy:'-startDate'"
          ui-sref="home.term-detail({ id: term.id })">
       <div class="card-section">
         <h5 ng-bind="term.name"></h5>

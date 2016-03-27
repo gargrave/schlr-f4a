@@ -22,7 +22,7 @@ module schlr.terms {
      = CRUD method callbacks
      =============================================*/
     afterQuerySuccess(res: any): void {
-      this.entries = _.orderBy(this.entries, '-startDate', 'desc');
+      this.entries = _.orderBy(this.entries, 'startDate', 'desc');
       this.activeTerm = this.activeTerm || this.entries[0];
     }
 
