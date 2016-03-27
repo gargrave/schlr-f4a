@@ -61,22 +61,23 @@
     </button>
 
     <!-- submit button for 'update' view -->
-    <button class="button"
+    <button class="button success"
             ng-click="vm.submit(entryForm)"
             ng-if="vm.isUpdateView()" ng-cloak
+            ng-class="{ disabled: !vm.canSaveUpdate() }"
             ng-disabled="vm.working || !vm.canSaveUpdate()">
-      Update
+      Save
     </button>
-
-    <!-- delete button -->
-    <a class="button" href="" ng-click="vm.remove()"
-       ng-if="vm.isUpdateView()" ng-cloak>
-      Delete
-    </a>
 
     <!-- cancel button -->
     <a class="hollow button" href="" ng-click="vm.cancel()">
       Cancel
+    </a>
+
+    <!-- delete button -->
+    <a class="alert button float-right" href="" ng-click="vm.remove()"
+       ng-if="vm.isUpdateView()" ng-cloak>
+      Delete
     </a>
   </div>
 </form>

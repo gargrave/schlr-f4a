@@ -1,10 +1,12 @@
 @import "settings";
 @import "foundation";
 
-$primaryMed: rgba($primary-color, .8);
-$primaryLight: rgba($primary-color, .5);
-$primaryLightMed: rgba($primary-color, .25);
-$primaryExtraLight: rgba($primary-color, .15);
+//$primaryMed: rgba($primary-color, .8);
+//$primaryLight: rgba($primary-color, .5);
+//$primaryExtraLight: rgba($primary-color, .15);
+$primaryMed: desaturate(lighten($primary-color, 8%), 18%);
+$primaryLight: desaturate(lighten($primary-color, 35%), 55%);
+$primaryExtraLight: desaturate(lighten($primary-color, 68%), 68%);
 
 $border: 1px solid $primaryExtraLight;
 $text-muted: #878787;
@@ -108,6 +110,14 @@ a > {
   border: 0;
   a {
     color: white;
+  }
+}
+
+// card for displaying term details in term-list
+.term-list-card {
+  cursor: pointer;
+  :hover {
+    background-color: $primaryExtraLight;
   }
 }
 

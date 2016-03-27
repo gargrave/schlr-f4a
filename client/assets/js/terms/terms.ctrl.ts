@@ -42,7 +42,7 @@ module schlr.terms {
     }
 
     canSaveUpdate(): boolean {
-      return this.auth.isLoggedIn() &&
+      return this.auth.isLoggedIn() && this.entry !== undefined &&
         (this.entry.name !== this.originalEntry.name ||
         (!_.isEqual(this.entry.startDate, this.originalEntry.startDate)) ||
         (!_.isEqual(this.entry.endDate, this.originalEntry.endDate)));

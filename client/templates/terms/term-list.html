@@ -23,7 +23,8 @@ controller: TermsCtrl as vm
   <!-- terms list, auth -->
   <div ng-if="main.isLoggedIn()">
     <!-- term details item -->
-    <div class="card" ng-repeat="term in vm.entries | orderBy:'-startDate'">
+    <div class="card term-list-card" ng-repeat="term in vm.entries | orderBy:'-startDate'"
+         ui-sref="home.term-detail({ id: term.id })">
       <div class="card-section">
         <h5 ng-bind="term.name"></h5>
         <div class="text-muted">
