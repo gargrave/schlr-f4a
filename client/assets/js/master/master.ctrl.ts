@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 module schlr {
 
-  export class MasterCtrl {
+  export class MainCtrl {
 
     static $inject = [
       '$scope', '$state',
       'AuthSvc', 'AuthUpdaterSvc',
-      'ApiUpdaterSvc', 'MasterSvc'
+      'ApiUpdaterSvc', 'MainSvc'
     ];
 
     // whether the controller is currently in 'initializing' state
@@ -17,7 +17,7 @@ module schlr {
                 private auth: auth.AuthSvc,
                 private authUpdater: auth.AuthUpdaterSvc,
                 private apiUpdater: app.common.ApiUpdaterSvc,
-                private masterSvc: MasterSvc) {
+                private mainSvc: MainSvc) {
       // add listeners for auth events
       authUpdater.listenForLoginStart(() => this.onLoginStart());
       authUpdater.listenForLoginEnd(() => this.onLoginEnd());
@@ -56,7 +56,7 @@ module schlr {
      * Callback for when auth service begins the logout process.
      */
     onLogoutStart(): void {
-      this.masterSvc.clearAll();
+      this.mainSvc.clearAll();
     }
 
     /**
@@ -97,7 +97,7 @@ module schlr {
      = data handling methods
      ==============================================*/
     initializeData(): void {
-      this.masterSvc.queryAll();
+      this.mainSvc.queryAll();
     }
 
     finishInitialization(): void {
@@ -105,5 +105,5 @@ module schlr {
     }
   }
 
-  angular.module('schlr').controller('MasterCtrl', MasterCtrl);
+  angular.module('schlr').controller('MainCtrl', MainCtrl);
 }

@@ -23,7 +23,7 @@ module schlr.entries {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'AlertsSvc', 'EntriesSvc', 'MasterSvc',
+      'AuthSvc', 'AlertsSvc', 'EntriesSvc', 'MainSvc',
       'CoursesSvc', 'TermsSvc', 'ApiUpdaterSvc'
     ];
 
@@ -39,11 +39,11 @@ module schlr.entries {
                 $stateParams: ng.ui.IStateParamsService,
                 auth: auth.AuthSvc,
                 dataSvc: EntriesSvc,
-                masterSvc: schlr.MasterSvc,
+                mainSvc: schlr.MainSvc,
                 private coursesSvc: schlr.courses.CoursesSvc,
                 private termsSvc: schlr.terms.TermsSvc,
                 private apiUpdater: app.common.ApiUpdaterSvc) {
-      super($scope, $state, $stateParams, auth, dataSvc, masterSvc, 'entry');
+      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, 'entry');
       // dataSvc as EntriesSvc for local use
       this.entriesSvc = <EntriesSvc>dataSvc;
 
@@ -65,7 +65,7 @@ module schlr.entries {
      = ionic view callbacks
      =============================================*/
     initListView(): void {
-      if (!this.masterSvc.isLoading()) {
+      if (!this.mainSvc.isLoading()) {
         this.buildLocalEntryList();
       }
     }

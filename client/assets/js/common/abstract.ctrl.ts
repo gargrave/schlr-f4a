@@ -15,7 +15,7 @@ module app.common {
                 protected $stateParams: ng.ui.IStateParamsService,
                 protected auth: auth.AuthSvc,
                 protected dataSvc: app.common.AbstractSvc,
-                protected masterSvc: app.common.IMasterSvc,
+                protected mainSvc: app.common.IMainSvc,
                 protected moduleName: string) {
       this.working = true;
       this.showSearch = false;
@@ -64,19 +64,19 @@ module app.common {
     }
 
     initListView(): void {
-      if (!this.masterSvc.isLoading()) {
+      if (!this.mainSvc.isLoading()) {
         this.find();
       }
     }
 
     initDetailView(): void {
-      if (!this.masterSvc.isLoading()) {
+      if (!this.mainSvc.isLoading()) {
         this.findOne();
       }
     }
 
     initUpdateView(): void {
-      if (!this.masterSvc.isLoading()) {
+      if (!this.mainSvc.isLoading()) {
         this.findOne();
       }
     }

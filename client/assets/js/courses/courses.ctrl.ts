@@ -38,7 +38,7 @@ module schlr.courses {
     static $inject = [
       '$scope', '$state', '$stateParams',
       'AuthSvc', 'AlertsSvc', 'CoursesSvc',
-      'MasterSvc', 'TermsSvc', 'ApiUpdaterSvc'
+      'MainSvc', 'TermsSvc', 'ApiUpdaterSvc'
     ];
 
     termsForSelect: any[];
@@ -48,10 +48,10 @@ module schlr.courses {
                 $stateParams: ng.ui.IStateParamsService,
                 auth: auth.AuthSvc,
                 dataSvc: CoursesSvc,
-                masterSvc: schlr.MasterSvc,
+                mainSvc: schlr.MainSvc,
                 private termsSvc: TermsSvc,
                 private apiUpdater: app.common.ApiUpdaterSvc) {
-      super($scope, $state, $stateParams, auth, dataSvc, masterSvc, 'course');
+      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, 'course');
       // add listener for master service updates
       apiUpdater.listenForAfterUpdate(() => {
         this.find();

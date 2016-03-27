@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 module app.common {
 
-  export interface IMasterSvc {
+  export interface IMainSvc {
     queryAll(): void;
     clearAll(): void;
     finish(): void;

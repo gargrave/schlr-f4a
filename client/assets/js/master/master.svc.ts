@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 module schlr {
 
-  export class MasterSvc implements app.common.IMasterSvc {
+  export class MainSvc implements app.common.IMainSvc {
 
     static $inject = [
       'TermsSvc', 'CoursesSvc', 'EntriesSvc',
@@ -18,7 +18,7 @@ module schlr {
     }
 
     /*==============================================
-     = IMasterSvc implementation
+     = IMainSvc implementation
      ==============================================*/
     queryAll(): void {
       this.loading = true;
@@ -89,5 +89,5 @@ module schlr {
     }
   }
 
-  angular.module('schlr').service('MasterSvc', MasterSvc);
+  angular.module('schlr').service('MainSvc', MainSvc);
 }

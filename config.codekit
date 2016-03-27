@@ -4972,19 +4972,19 @@
 		"suppressImplicitAnyIndexErrors": 0,
 		"targetECMAVersion": 1
 		},
-	"\/client\/assets\/js\/common\/i.master.svc.ts": {
+	"\/client\/assets\/js\/common\/i-main.svc.ts": {
 		"createDeclarationFile": 0,
 		"createSourceMap": 0,
 		"fileType": 128,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/assets\/js\/common\/i.master.svc.ts",
+		"inputAbbreviatedPath": "\/client\/assets\/js\/common\/i-main.svc.ts",
 		"jsxMode": 0,
 		"minifyOutput": 0,
 		"moduleResolutionType": 0,
 		"moduleType": 0,
 		"noImplicitAny": 0,
-		"outputAbbreviatedPath": "\/client\/assets\/js\/common\/js\/i.master.svc.js",
+		"outputAbbreviatedPath": "\/client\/assets\/js\/common\/js\/i-main.svc.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"preserveConstEnums": 0,
@@ -5347,6 +5347,17 @@
 		"processHTML": 0,
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
+		},
+	"\/stamplay.json": {
+		"fileType": 524288,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/stamplay.json",
+		"orderOutput": 0,
+		"outputAbbreviatedPath": "\/stamplay-min.json",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
 		},
 	"\/tsconfig.json": {
 		"fileType": 524288,
