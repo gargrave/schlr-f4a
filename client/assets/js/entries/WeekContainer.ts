@@ -5,7 +5,7 @@ module schlr.entries {
     // the number of this week in the term
     weekNumber: string;
     // the collection of CourseContainer objects for this week
-    courses: CourseContainer[] = [];
+    courses: ICourseContainer[] = [];
     // total number of entries in this week
     entryCount: number = 0;
     // number of entries contained within marked as 'finished'

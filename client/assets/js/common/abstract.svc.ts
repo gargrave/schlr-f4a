@@ -11,9 +11,6 @@ module app.common {
     protected pendingQuery: boolean = false;
     // the base URL for this module's API
     protected crudApiUrl: string;
-    // whether the next operation should show the loading screen
-    // this will always be true unless hideLoadingScreen() is called
-    // before an API operation
     protected needsUpdate: boolean;
     protected paramsString: string;
     protected selectProps: string[] = [];
@@ -125,7 +122,6 @@ module app.common {
      */
     queryRefresh(): ng.IPromise<any> {
       this.clearLocalData();
-      this.hideLoadingScreen();
       return this.query(true);
     }
 
