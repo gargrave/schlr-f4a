@@ -21,9 +21,14 @@ module app.common {
       this.showSearch = false;
 
       // listen for view enter events
-      $scope.$on('$ionicView.beforeEnter', (e) => {
-        if (this.auth.isLoggedIn()) {
-          this.onBeforeEnterView();
+      $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        console.log('checking auth');
+        console.log('toState.authenticate:');
+        console.log(toState.authenticate);
+        if (!auth.isLoggedIn()) {
+          // User isn’t authenticated
+          $state.transitionTo('home.account');
+          event.preventDefault();
         }
       });
     }

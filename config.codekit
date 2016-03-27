@@ -4462,6 +4462,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/build\/assets\/js\/common\/i-main.svc.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/assets\/js\/common\/i-main.svc.js",
+		"outputAbbreviatedPath": "\/build\/assets\/js\/common\/min\/i-main.svc-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/build\/assets\/js\/common\/i.master.svc.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -4616,6 +4627,28 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/build\/assets\/js\/main\/main.ctrl.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/assets\/js\/main\/main.ctrl.js",
+		"outputAbbreviatedPath": "\/build\/assets\/js\/main\/min\/main.ctrl-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/build\/assets\/js\/main\/main.svc.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/assets\/js\/main\/main.svc.js",
+		"outputAbbreviatedPath": "\/build\/assets\/js\/main\/min\/main.svc-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/build\/assets\/js\/master\/master.ctrl.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -4687,6 +4720,24 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/build\/templates\/courses\/course-list.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/templates\/courses\/course-list.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/build\/templates\/entries\/entry-list.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/templates\/entries\/entry-list.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/build\/templates\/entry-list.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -4728,6 +4779,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/build\/templates\/term-list.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/build\/templates\/terms\/term-list.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/templates\/terms\/term-list.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -5112,19 +5172,19 @@
 		"suppressImplicitAnyIndexErrors": 0,
 		"targetECMAVersion": 1
 		},
-	"\/client\/assets\/js\/master\/master.ctrl.ts": {
+	"\/client\/assets\/js\/main\/main.ctrl.ts": {
 		"createDeclarationFile": 0,
 		"createSourceMap": 0,
 		"fileType": 128,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/assets\/js\/master\/master.ctrl.ts",
+		"inputAbbreviatedPath": "\/client\/assets\/js\/main\/main.ctrl.ts",
 		"jsxMode": 0,
 		"minifyOutput": 0,
 		"moduleResolutionType": 0,
 		"moduleType": 0,
 		"noImplicitAny": 0,
-		"outputAbbreviatedPath": "\/client\/assets\/js\/master\/js\/master.ctrl.js",
+		"outputAbbreviatedPath": "\/client\/assets\/js\/main\/js\/main.ctrl.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"preserveConstEnums": 0,
@@ -5132,19 +5192,19 @@
 		"suppressImplicitAnyIndexErrors": 0,
 		"targetECMAVersion": 1
 		},
-	"\/client\/assets\/js\/master\/master.svc.ts": {
+	"\/client\/assets\/js\/main\/main.svc.ts": {
 		"createDeclarationFile": 0,
 		"createSourceMap": 0,
 		"fileType": 128,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/assets\/js\/master\/master.svc.ts",
+		"inputAbbreviatedPath": "\/client\/assets\/js\/main\/main.svc.ts",
 		"jsxMode": 0,
 		"minifyOutput": 0,
 		"moduleResolutionType": 0,
 		"moduleType": 0,
 		"noImplicitAny": 0,
-		"outputAbbreviatedPath": "\/client\/assets\/js\/master\/js\/master.svc.js",
+		"outputAbbreviatedPath": "\/client\/assets\/js\/main\/js\/main.svc.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"preserveConstEnums": 0,
@@ -5242,20 +5302,20 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/client\/templates\/course-list.html": {
+	"\/client\/templates\/courses\/course-list.html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/templates\/course-list.html",
+		"inputAbbreviatedPath": "\/client\/templates\/courses\/course-list.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/client\/templates\/entry-list.html": {
+	"\/client\/templates\/entries\/entry-list.html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/templates\/entry-list.html",
+		"inputAbbreviatedPath": "\/client\/templates\/entries\/entry-list.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -5287,11 +5347,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/client\/templates\/term-list.html": {
+	"\/client\/templates\/terms\/term-list.html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/client\/templates\/term-list.html",
+		"inputAbbreviatedPath": "\/client\/templates\/terms\/term-list.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0

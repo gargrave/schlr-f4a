@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path='../../../typings/tsd.d.ts' />
 module schlr {
   angular.module('schlr', [
       'auth',
@@ -18,23 +18,19 @@ module schlr {
       'PROD': 'https://schlr-dev.stamplayapp.com'
       // 'PROD': 'https://schlr.stamplayapp.com'
     })
-    .config(config)
-    .run(run);
 
-  config.$inject = ['$urlRouterProvider', '$locationProvider'];
+    .config(function($urlRouterProvider, $locationProvider) {
+      $urlRouterProvider.otherwise('/entries');
 
-  function config($urlProvider, $locationProvider) {
-    $urlProvider.otherwise('/entries');
+      $locationProvider.html5Mode({
+        enabled: false,
+        requireBase: false
+      });
 
-    $locationProvider.html5Mode({
-      enabled: false,
-      requireBase: false
+      $locationProvider.hashPrefix('!');
+    })
+
+    .run(function() {
+      FastClick.attach(document.body);
     });
-
-    $locationProvider.hashPrefix('!');
-  }
-
-  function run() {
-    FastClick.attach(document.body);
-  }
 }

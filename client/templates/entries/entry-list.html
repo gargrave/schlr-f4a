@@ -1,0 +1,72 @@
+---
+name: home.entry-list
+url: entries
+---
+
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">Week 5 (MOCK DATA)</div>
+    <span class="left">
+      <a href="#">
+        <img zf-iconic="" icon="chevron" data-direction="left" size="small"
+             class="iconic-color-secondary icon-white">
+        Prev
+      </a>
+    </span>
+    <span class="right">
+      <a href="#">
+        Next
+        <img zf-iconic="" icon="chevron" data-direction="right" size="small"
+             class="iconic-color-secondary icon-white">
+      </a>
+    </span>
+</div>
+
+<div ng-if="!main.isLoggedIn()">
+  You are not logged in.
+</div>
+
+<!-- entries list -->
+<div ng-if="main.isLoggedIn()">
+  <div class="title-bar content-subtitle content-subtitle-first">
+    <div class="left title">CIS-233W (MOCK DATA)</div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>ASSN: Assignment 5</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>READ: Chapter 5</p>
+    </div>
+  </div>
+
+  <div class="title-bar content-subtitle">
+    <div class="left title">CIS-195P (MOCK DATA)</div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>ASSN: Assignment 5</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>DISC: Discussion 5</p>
+    </div>
+  </div>
+
+  <div class="title-bar content-subtitle">
+    <div class="left title">CIS-233N (MOCK DATA)</div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>ASSN: Assignment 5</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-section">
+      <p>DISC: Discussion 5</p>
+    </div>
+  </div>
+</div>
