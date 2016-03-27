@@ -1,41 +1,37 @@
 ---
 name: home.term-list
 url: terms
+controller: TermsCtrl as vm
 ---
 
-<!-- sub-title bar -->
-<div class="title-bar entries-title-bar">
-  <div class="center title">Terms (MOCK DATA)</div>
-</div>
-
-<!-- terms list -->
-<div ng-if="!main.isLoggedIn()">
-  You are not logged in.
-</div>
-
-<div ng-if="main.isLoggedIn()">
-  <div class="card">
-    <div class="card-section">
-      <h5>Spring 2016 (MOCK DATA)</h5>
-      <div class="text-muted">
-        <p>Jan 3, 2016 - Mar 20, 2016</p>
-      </div>
-    </div>
+<div ng-init="vm.initListView()">
+  <!-- sub-title bar -->
+  <div class="title-bar entries-title-bar">
+    <div class="center title">Terms</div>
+    <span class="right">
+    <a href="" ui-sref="home.term-create">
+      <strong>+</strong>
+    </a>
+  </span>
   </div>
-  <div class="card">
-    <div class="card-section">
-      <h5>Winter 2016 (MOCK DATA)</h5>
-      <div class="text-muted">
-        <p>Jan 3, 2016 - Mar 20, 2016</p>
+
+  <!-- terms list, no-auth -->
+  <div ng-if="!main.isLoggedIn()">
+    <p>You are not logged in.</p>
+  </div><!-- /terms list, no-auth -->
+
+  <!-- terms list, auth -->
+  <div ng-if="main.isLoggedIn()">
+    <!-- term details item -->
+    <div class="card" ng-repeat="term in vm.entries | orderBy:'-startDate'">
+      <div class="card-section">
+        <h5 ng-bind="term.name"></h5>
+        <div class="text-muted">
+          <span ng-bind="term.startDate | date"></span> -
+          <span ng-bind="term.endDate | date"></span>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <h5>Fall 2015 (MOCK DATA)</h5>
-      <div class="text-muted">
-        <p>Sep 21, 2015 - Dev 12, 2015</p>
-      </div>
-    </div>
+    </div><!-- /terms list, auth -->
+
   </div>
 </div>

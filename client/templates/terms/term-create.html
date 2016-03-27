@@ -1,0 +1,32 @@
+---
+name: home.term-create
+url: terms/create
+controller: TermsCtrl as vm
+---
+
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">Add a Term</div>
+</div>
+
+
+<div class="grid-block align-center" ng-init="vm.initListView()">
+  <div class="grid-content medium-6">
+
+    <!-- terms list, no-auth -->
+    <div ng-if="!main.isLoggedIn()">
+      <p>You are not logged in.</p>
+    </div><!-- /terms list, no-auth -->
+
+    <!-- term create form, auth -->
+    <div class="card" ng-if="main.isLoggedIn()">
+      <div class="card-section">
+        <div class="title-bar content-subtitle">
+          <div class="left title">New Term Details</div>
+        </div>
+        <div ng-include="'templates/forms/term-form.html'"></div>
+      </div>
+    </div><!-- /term create form, auth -->
+
+  </div>
+</div>

@@ -101,7 +101,7 @@ module app.common {
           this.$http.get(url, this.auth.getRequestHeaders())
             .then((res) => {
               this.entries = res.data['data'];
-              this.afterQuerySuccess(res);
+              this.afterQuerySuccess(this.entries);
               this.deferredQuery.resolve(this.entries);
               this.deferredQuery = null;
               this.needsUpdate = false;

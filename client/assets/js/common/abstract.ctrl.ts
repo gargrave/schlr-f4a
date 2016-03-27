@@ -19,18 +19,6 @@ module app.common {
                 protected moduleName: string) {
       this.working = true;
       this.showSearch = false;
-
-      // listen for view enter events
-      $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        console.log('checking auth');
-        console.log('toState.authenticate:');
-        console.log(toState.authenticate);
-        if (!auth.isLoggedIn()) {
-          // User isn’t authenticated
-          $state.transitionTo('home.account');
-          event.preventDefault();
-        }
-      });
     }
 
     /*=============================================
@@ -38,36 +26,24 @@ module app.common {
      =============================================*/
 
     isListView(): boolean {
-      return this.$state.is(`app.${this.moduleName}-list`);
+      return this.$state.is(`home.${this.moduleName}-list`);
     }
 
     isDetailView(): boolean {
-      return this.$state.is(`app.${this.moduleName}-detail`);
+      return this.$state.is(`home.${this.moduleName}-detail`);
     }
 
     isUpdateView(): boolean {
-      return this.$state.is(`app.${this.moduleName}-update`);
+      return this.$state.is(`home.${this.moduleName}-update`);
     }
 
     isCreateView(): boolean {
-      return this.$state.is(`app.${this.moduleName}-create`);
+      return this.$state.is(`home.${this.moduleName}-create`);
     }
 
     /*=============================================
      = ionic view callbacks
      =============================================*/
-    private onBeforeEnterView(): void {
-      if (this.isListView()) {
-        this.initListView();
-      } else if (this.isDetailView()) {
-        this.initDetailView();
-      } else if (this.isUpdateView()) {
-        this.initUpdateView();
-      } else if (this.isCreateView()) {
-        this.initCreateView();
-      }
-    }
-
     initListView(): void {
       if (!this.mainSvc.isLoading()) {
         this.find();
@@ -156,7 +132,7 @@ module app.common {
 
     removeById(id: string): void {
       if (this.auth.isLoggedIn()) {
-        // TODO replace this with an F4A model
+        // TODO replace this with an F4A modal
         if (confirm('Delete this entry?')) {
           this.working = true;
           this.dataSvc.remove(id)
@@ -259,14 +235,14 @@ module app.common {
      * Moves the current view to the module's 'list' view.
      */
     gotoListView(): void {
-      this.$state.go(`app.${this.moduleName}-list`);
+      this.$state.go(`home.${this.moduleName}-list`);
     }
 
     /**
      * Moves the current view to the module's 'detail' view.
      */
     gotoDetailView(id: string): void {
-      this.$state.go(`app.${this.moduleName}-detail`, {id: id});
+      this.$state.go(`home.${this.moduleName}-detail`, {id: id});
     }
 
     /**

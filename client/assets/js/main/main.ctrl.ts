@@ -90,7 +90,7 @@ module schlr {
      * Redirects the user to the login page.
      */
     goToLogin(): void {
-      this.$state.go('app.account');
+      this.$state.go('home.account');
     };
 
     /*==============================================

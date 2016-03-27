@@ -1,0 +1,82 @@
+<!-- ngMessages templates -->
+<script type="text/ng-template" id="error-messages">
+  <div ng-message="required">This field is required.</div>
+  <div ng-message="minlength">Must be at least 3 characters long.</div>
+</script>
+
+<form method="POST" id="entryForm" name="entryForm" novalidate>
+  <!-- term name input -->
+  <label class="item item-input">
+    <span class="input-label">Name: </span>
+    <!-- name validation messages -->
+    <span class="validation-error" role="alert"
+          ng-messages="entryForm.name.$error"
+          ng-show="entryForm.$submitted && entryForm.name.$invalid">
+      <span ng-messages-include="error-messages"></span>
+    </span>
+    <input name="name" id="name" type="text"
+           minlength="3" maxlength="16"
+           placeholder="Spring 2016"
+           ng-model="vm.entry.name" required>
+  </label>
+
+
+  <!-- start date -->
+  <label class="item item-input">
+    <span class="input-label go-item-label">Start Date: </span>
+    <!-- start date validation messages -->
+    <span class="validation-error" role="alert"
+          ng-messages="entryForm.startDate.$error"
+          ng-show="entryForm.$submitted && entryForm.startDate.$invalid"
+          ng-if="vm.isCreateView()" ng-cloak>
+      <span ng-messages-include="error-messages"></span>
+    </span>
+    <input type="date" id="startDate" name="startDate"
+           maxlength="10" ng-model="vm.entry.startDate" required>
+  </label>
+
+
+  <!-- end date -->
+  <label class="item item-input">
+    <span class="input-label go-item-label">End Date: </span>
+    <!-- end date validation messages -->
+    <span class="validation-error" role="alert"
+          ng-messages="entryForm.endDate.$error"
+          ng-show="entryForm.$submitted && entryForm.endDate.$invalid"
+          ng-if="vm.isCreateView()" ng-cloak>
+      <span ng-messages-include="error-messages"></span>
+    </span>
+    <input type="date" id="endDate" name="endDate"
+           maxlength="10" ng-model="vm.entry.endDate" required>
+  </label>
+
+
+  <div class="item">
+    <!-- submit button for 'create' view -->
+    <button class="button"
+            ng-click="vm.submit(entryForm)"
+            ng-if="vm.isCreateView()" ng-cloak
+            ng-disabled="vm.working">
+      Submit
+    </button>
+
+    <!-- submit button for 'update' view -->
+    <button class="button"
+            ng-click="vm.submit(entryForm)"
+            ng-if="vm.isUpdateView()" ng-cloak
+            ng-disabled="vm.working || !vm.canSaveUpdate()">
+      Update
+    </button>
+
+    <!-- delete button -->
+    <a class="button" href="" ng-click="vm.remove()"
+       ng-if="vm.isUpdateView()" ng-cloak>
+      Delete
+    </a>
+
+    <!-- cancel button -->
+    <a class="hollow button" href="" ng-click="vm.cancel()">
+      Cancel
+    </a>
+  </div>
+</form>

@@ -10,7 +10,7 @@ module schlr.terms {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'AlertsSvc', 'TermsSvc',
+      'AuthSvc', 'TermsSvc',
       'MainSvc', 'ApiUpdaterSvc'
     ];
 
