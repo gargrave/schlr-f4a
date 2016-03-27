@@ -121,6 +121,12 @@ a > {
   }
 }
 
+// style for entry that are marked as 'finished'
+.entry-finished {
+  color: $text-muted;
+  text-decoration: line-through;
+}
+
 #left-menu {
   border-right: $border;
   box-shadow: 0 1px 5px rgba(1, 1, 1, 0.1);

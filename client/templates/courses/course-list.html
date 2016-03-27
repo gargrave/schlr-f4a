@@ -25,7 +25,8 @@ controller: CoursesCtrl as vm
       <div ng-repeat="term in vm.entries | orderBy:'-startDate'">
 
         <!-- term separator bar -->
-        <div class="title-bar content-subtitle content-subtitle-first">
+        <div class="title-bar content-subtitle"
+             ng-class="{ 'content-subtitle-first': $first }">
           <div class="left title" ng-bind="term.name"></div>
         </div>
 

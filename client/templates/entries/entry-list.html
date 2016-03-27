@@ -1,72 +1,132 @@
 ---
 name: home.entry-list
 url: entries
+controller: EntriesCtrl as vm
 ---
 
-<!-- sub-title bar -->
-<div class="title-bar entries-title-bar">
-  <div class="center title">Week 5 (MOCK DATA)</div>
-  <span class="left">
-    <a href="">
-      <img zf-iconic="" icon="chevron" data-direction="left" size="small"
-           class="iconic-color-secondary icon-white">
-      Prev
-    </a>
-  </span>
-  <span class="right">
-    <a href="">
-      Next
-      <img zf-iconic="" icon="chevron" data-direction="right" size="small"
-           class="iconic-color-secondary icon-white">
-    </a>
-  </span>
-</div>
+<div ng-init="vm.initListView()">
+  <!-- sub-title bar -->
+  <div class="title-bar entries-title-bar">
+    <div class="center title">Week 5 (MOCK DATA)</div>
+    <!-- "previous week" button -->
+    <span class="left">
+      <a href="">
+        <img zf-iconic="" icon="chevron" data-direction="left" size="small"
+             class="iconic-color-secondary icon-white">
+        Prev
+      </a>
+    </span>
+    <!-- "next week" button -->
+    <span class="right">
+      <a href="">
+        Next
+        <img zf-iconic="" icon="chevron" data-direction="right" size="small"
+             class="iconic-color-secondary icon-white">
+      </a>
+    </span>
+  </div><!-- /sub-title bar -->
 
-<div ng-if="!main.isLoggedIn()">
-  You are not logged in.
-</div>
 
-<!-- entries list -->
-<div ng-if="main.isLoggedIn()">
-  <div class="title-bar content-subtitle content-subtitle-first">
-    <div class="left title">CIS-233W (MOCK DATA)</div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>ASSN: Assignment 5</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>READ: Chapter 5</p>
-    </div>
-  </div>
+  <!-- entries list, no-auth -->
+  <div ng-if="!main.isLoggedIn()">
+    You are not logged in.
+  </div><!-- /entries list, no-auth -->
 
-  <div class="title-bar content-subtitle">
-    <div class="left title">CIS-195P (MOCK DATA)</div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>ASSN: Assignment 5</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>DISC: Discussion 5</p>
-    </div>
-  </div>
 
-  <div class="title-bar content-subtitle">
-    <div class="left title">CIS-233N (MOCK DATA)</div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>ASSN: Assignment 5</p>
+  <!-- entries list, auth -->
+  <div ng-if="main.isLoggedIn()">
+
+    <div ng-repeat="week in vm.weekContainers | orderBy:'-number'">
+
+      <!-- week number display as divider -->
+      <div class="title-bar content-subtitle"
+           ng-class="{ 'content-subtitle-first': $first }"
+           ng-click="vm.toggleWeekHidden(week.weekNumber)">
+        <div class="left title">
+          Week <span ng-bind="week.weekNumber"></span> |
+          <span ng-if="!week.complete" ng-cloak>
+            <span ng-bind="week.finishedCount"></span> /
+            <span ng-bind="week.entryCount"></span> finished
+          </span>
+          <span ng-if="week.complete" ng-cloak>
+            Done!
+          </span>
+        </div>
+      </div><!-- /week  divider -->
+
+
+      <!-- week body -->
+      <div ng-hide="week.hidden" ng-cloak>
+        <div ng-repeat="course in week.courses">
+
+          <!-- use each course name as a sub-divider -->
+          <div ng-click="vm.showEntryCreate(week.weekNumber, course.id)">
+            <span ng-bind="course.name"></span>
+            <small ng-if="!course.entries.length" ng-cloak>
+              (no entries)
+            </small>
+          </div>
+
+          <!-- each individual entry -->
+          <div class="card list-view-card"
+               ng-repeat="entry in course.entries"
+               ng-click="vm.updateFinishedState(entry)"
+               ng-model="entry.finished">
+            <div class="card-section">
+              <img zf-iconic="" icon="circle-check" size="small" class="float-right"
+                   ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
+              <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /week body -->
+
+
+    </div><!-- /ng-repeat -->
+
+    <div class="title-bar content-subtitle content-subtitle-first">
+      <div class="left title">CIS-233W (MOCK DATA)</div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>DISC: Discussion 5</p>
+    <div class="card">
+      <div class="card-section">
+        <p>ASSN: Assignment 5</p>
+      </div>
     </div>
-  </div>
+    <div class="card">
+      <div class="card-section">
+        <p>READ: Chapter 5</p>
+      </div>
+    </div>
+
+    <!--
+    <div class="title-bar content-subtitle">
+      <div class="left title">CIS-195P (MOCK DATA)</div>
+    </div>
+    <div class="card">
+      <div class="card-section">
+        <p>ASSN: Assignment 5</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-section">
+        <p>DISC: Discussion 5</p>
+      </div>
+    </div>
+
+    <div class="title-bar content-subtitle">
+      <div class="left title">CIS-233N (MOCK DATA)</div>
+    </div>
+    <div class="card">
+      <div class="card-section">
+        <p>ASSN: Assignment 5</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-section">
+        <p>DISC: Discussion 5</p>
+      </div>
+    </div>
+    <!---->
+  </div><!-- /entries list, auth -->
 </div>

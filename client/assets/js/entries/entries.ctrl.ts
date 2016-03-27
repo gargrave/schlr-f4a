@@ -23,7 +23,7 @@ module schlr.entries {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'AlertsSvc', 'EntriesSvc', 'MainSvc',
+      'AuthSvc', 'EntriesSvc', 'MainSvc',
       'CoursesSvc', 'TermsSvc', 'ApiUpdaterSvc'
     ];
 
@@ -46,11 +46,6 @@ module schlr.entries {
       super($scope, $state, $stateParams, auth, dataSvc, mainSvc, 'entry');
       // dataSvc as EntriesSvc for local use
       this.entriesSvc = <EntriesSvc>dataSvc;
-
-      // set callback for modal being hidden
-      $scope.$on('modal.hidden', () => {
-        this.onModalHidden();
-      });
 
       apiUpdater.listenForBeforeUpdate(() => {
         this.onBeforeApiUpdate();

@@ -23,7 +23,7 @@ module schlr.terms {
      =============================================*/
     afterQuerySuccess(res: any): void {
       this.entries = _.orderBy(this.entries, 'startDate', 'desc');
-      this.activeTerm = this.activeTerm || this.entries[0];
+      this.activeTerm = this.activeTerm || this.entries[1];
     }
 
     /*=============================================
