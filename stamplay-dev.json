@@ -1,0 +1,10 @@
+{
+  "appId": "schlr-dev",
+  "apiKey": "668a862172c9ff3d3be3f856bbd7722acb80acfc04f7da0beb75ef38bedb1ead",
+  "public": "./build",
+  "ignore": [
+    "stamplay.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
