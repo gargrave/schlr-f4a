@@ -12,6 +12,7 @@ var rimraf = require('rimraf');
 var router = require('front-router');
 var sequence = require('run-sequence');
 var replace = require('gulp-replace');
+var ts = require('gulp-typescript');
 
 // Check for --production flag
 var isProduction = !!(argv.production);
@@ -43,6 +44,15 @@ var paths = {
     'bower_components/foundation-apps/js/angular/**/*.js',
     '!bower_components/foundation-apps/js/angular/app.js'
   ],
+  libsJS: [
+    'bower_components/lodash/dist/lodash.min.js',
+    'bower_components/angular-cookies/angular-cookies.min.js',
+    'bower_components/angular-cache/dist/angular-cache.min.js',
+    'bower_components/angular-messages/angular-messages.min.js'
+  ],
+  appTS: [
+    './client/assets/js/**/*.ts'
+  ],
   // These files are for your app's JavaScript
   appJS: [
     'client/assets/js/app.js'
@@ -52,6 +62,9 @@ var paths = {
 // 3. TASKS
 // - - - - - - - - - - - - - - -
 
+/*==============================================
+ = clean
+ ==============================================*/
 // Cleans the build directory
 gulp.task('clean', function(cb) {
   rimraf('./build', cb);
@@ -97,6 +110,12 @@ gulp.task('copy:foundation', function(cb) {
   cb();
 });
 
+// copy required libs into 'build' folder
+gulp.task('copy:libs', function() {
+  return gulp.src(paths.libsJS)
+    .pipe(gulp.dest('./build/assets/js/libs/'));
+});
+
 /*=============================================
  = sass
  =============================================*/
@@ -115,6 +134,20 @@ gulp.task('sass', function() {
     }))
     .pipe(minifyCss)
     .pipe(gulp.dest('./build/assets/css/'));
+});
+
+/*==============================================
+ = typescript
+ ==============================================*/
+// compile all typescript source files
+gulp.task('ts', function() {
+  return gulp.src(paths.appTS)
+    .pipe(ts({
+      module: 'commonjs',
+      target: 'es5',
+      removeComments: true
+    }))
+    .pipe(gulp.dest('build/assets/js'));
 });
 
 /*=============================================
@@ -147,18 +180,6 @@ gulp.task('uglify:app', function() {
   //   .pipe(gulp.dest('./build/assets/js/'));
 });
 
-// Starts a test server, which you can view at http://localhost:8079
-// gulp.task('server', ['build'], function() {
-// gulp.src('./build')
-//   .pipe($.webserver({
-//     port: 8079,
-//     host: 'localhost',
-//     fallback: 'index.html',
-//     livereload: true,
-//     open: true
-//   }));
-// });
-
 /*=============================================
  = replace
  =============================================*/
@@ -180,7 +201,11 @@ gulp.task('replace-dist', function() {
 // Builds your entire app once, without starting a server
 gulp.task('build', function(cb) {
   // sequence('clean', ['copy', 'copy:foundation', 'sass', 'uglify'], 'copy:templates', cb);
-  sequence('clean', ['copy', 'copy:foundation', 'replace-build', 'uglify:foundation'], 'copy:templates', cb);
+  sequence('clean', [
+      'copy', 'copy:foundation', 'copy:libs',
+      'replace-build', 'uglify:foundation'
+    ],
+    'copy:templates', 'ts', 'sass', cb);
 });
 
 gulp.task('dist', function(cb) {
@@ -194,10 +219,8 @@ gulp.task('dist', function(cb) {
 gulp.task('default', function() {
   // Watch Sass
   gulp.watch('./client/assets/scss/**/*', ['sass']);
-
   // Watch JavaScript
   // gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app']);
-
   // Watch static files
   gulp.watch([
       './client/**/*.*',
@@ -206,10 +229,8 @@ gulp.task('default', function() {
       '!./client/assets/{scss,js}/**/*.*'
     ],
     ['copy']);
-
   // Watch app templates
   gulp.watch(['./client/templates/**/*.html'], ['copy:templates']);
-
   // watch index.html
   gulp.watch(['./client/index.html'], ['replace-build']);
 });

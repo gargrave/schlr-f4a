@@ -7,6 +7,8 @@
   },
   "exclude": [
     "bower_components",
+    "build",
+    "dist",
     "node_modules",
     "platforms",
     "typings"
