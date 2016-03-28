@@ -4,35 +4,33 @@ url: terms
 controller: TermsCtrl as vm
 ---
 
-<div ng-init="vm.initListView()">
-  <!-- sub-title bar -->
-  <div class="title-bar entries-title-bar">
-    <div class="center title">Terms</div>
-    <span class="right">
-      <a href="" ui-sref="home.term-create">
-        <strong>Add</strong>
-      </a>
-    </span>
-  </div><!-- /sub-title bar -->
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">Terms</div>
+  <span class="right">
+    <a href="" ui-sref="home.term-create">
+      <strong>Add</strong>
+    </a>
+  </span>
+</div><!-- /sub-title bar -->
 
-  <!-- terms list, no-auth -->
-  <div ng-if="!main.isLoggedIn()">
-    <p>You are not logged in.</p>
-  </div><!-- /terms list, no-auth -->
+<!-- terms list, no-auth -->
+<div ng-if="!main.isLoggedIn()">
+  <p>You are not logged in.</p>
+</div><!-- /terms list, no-auth -->
 
-  <!-- terms list, auth -->
-  <div ng-if="main.isLoggedIn()">
-    <!-- term details item -->
-    <div class="card list-view-card" ng-repeat="term in vm.entries | orderBy:'-startDate'"
-         ui-sref="home.term-detail({ id: term.id })">
-      <div class="card-section">
-        <h5 ng-bind="term.name"></h5>
-        <div class="text-muted">
-          <span ng-bind="term.startDate | date"></span> -
-          <span ng-bind="term.endDate | date"></span>
-        </div>
+<!-- terms list, auth -->
+<div ng-if="main.isLoggedIn()" ng-init="vm.initListView()">
+  <!-- term details item -->
+  <div class="card list-view-card" ng-repeat="term in vm.entries | orderBy:'-startDate'"
+       ui-sref="home.term-detail({ id: term.id })">
+    <div class="card-section">
+      <h5 ng-bind="term.name"></h5>
+      <div class="text-muted">
+        <span ng-bind="term.startDate | date"></span> -
+        <span ng-bind="term.endDate | date"></span>
       </div>
-    </div><!-- /terms list, auth -->
+    </div>
+  </div><!-- /terms list, auth -->
 
-  </div>
 </div>

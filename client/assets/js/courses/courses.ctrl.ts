@@ -63,10 +63,12 @@ module schlr.courses {
     }
 
     initListView(): void {
-      this.termsSvc.query()
-        .then((res) => {
-          this.find();
-        });
+      if (!this.mainSvc.isLoading()) {
+        this.termsSvc.query()
+          .then((res) => {
+            this.find();
+          });
+      }
     }
 
     initCreateView(): void {

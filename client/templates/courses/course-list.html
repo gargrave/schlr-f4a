@@ -4,43 +4,40 @@ url: courses
 controller: CoursesCtrl as vm
 ---
 
-<div ng-init="vm.initListView()">
-  <!-- sub-title bar -->
-  <div class="title-bar entries-title-bar">
-    <div class="center title">Courses</div>
-    <span class="right">
-      <a href="" ui-sref="home.course-create">
-        <strong>Add</strong>
-      </a>
-    </span>
-  </div>
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">Courses</div>
+  <span class="right">
+    <a href="" ui-sref="home.course-create">
+      <strong>Add</strong>
+    </a>
+  </span>
+</div>
 
-  <div ng-if="!main.isLoggedIn()">
-    You are not logged in.
-  </div>
+<div ng-if="!main.isLoggedIn()">
+  You are not logged in.
+</div>
 
-  <!-- courses list -->
-  <div ng-if="main.isLoggedIn()">
-    <div ng-if="vm.entries.length" ng-hide="vm.working" ng-cloak>
-      <div ng-repeat="term in vm.entries | orderBy:'-startDate'">
+<!-- courses list -->
+<div ng-if="main.isLoggedIn()" ng-init="vm.initListView()">
+  <div ng-if="vm.entries.length" ng-hide="vm.working" ng-cloak>
+    <div ng-repeat="term in vm.entries | orderBy:'-startDate'">
 
-        <!-- term separator bar -->
-        <div class="title-bar content-subtitle"
-             ng-class="{ 'content-subtitle-first': $first }">
-          <div class="left title" ng-bind="term.name"></div>
+      <!-- term separator bar -->
+      <div class="title-bar content-subtitle"
+           ng-class="{ 'content-subtitle-first': $first }">
+        <div class="left title" ng-bind="term.name"></div>
+      </div>
+
+      <!-- course details card -->
+      <div class="card list-view-card" ng-repeat="course in term.courses"
+           ui-sref="home.course-detail({ id: course.id })">
+        <div class="card-section">
+          <h5 ng-bind="course.name">CIS-195P</h5>
+          <p class="text-muted" ng-bind="course.fullName"></p>
         </div>
+      </div>
 
-        <!-- course details card -->
-        <div class="card list-view-card" ng-repeat="course in term.courses"
-             ui-sref="home.course-detail({ id: course.id })">
-          <div class="card-section">
-            <h5 ng-bind="course.name">CIS-195P</h5>
-            <p class="text-muted" ng-bind="course.fullName"></p>
-          </div>
-        </div>
-
-      </div><!-- /terms repeat -->
-    </div>
+    </div><!-- /terms repeat -->
   </div>
-
 </div>
