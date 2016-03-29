@@ -15,8 +15,7 @@ module schlr {
 
     .constant('URLS', {
       'DEV': 'https://schlr-dev.stamplayapp.com',
-      'PROD': 'https://schlr-dev.stamplayapp.com'
-      // 'PROD': 'https://schlr.stamplayapp.com'
+      'PROD': 'https://schlr.stamplayapp.com'
     })
 
     .config(function($urlRouterProvider, $locationProvider) {

@@ -26,8 +26,6 @@ module auth {
      */
     login(form: any): void {
       form.$submitted = true;
-      console.log('form.$valid:');
-      console.log(form.$valid);
       if (form.$valid) {
         this.auth.login(this.email, this.password)
           .then((res) => {

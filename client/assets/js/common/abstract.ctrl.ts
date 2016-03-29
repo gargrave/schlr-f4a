@@ -251,5 +251,13 @@ module app.common {
     toggleShowSearch(): void {
       this.showSearch = !this.showSearch;
     }
+
+    /*==============================================
+     = globals
+     ==============================================*/
+
+    isDev(): boolean {
+      return this.mainSvc.isDev();
+    }
   }
 }

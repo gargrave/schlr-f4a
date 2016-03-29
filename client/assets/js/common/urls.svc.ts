@@ -6,7 +6,7 @@ module app.common {
     static $inject = ['$location', 'URLS'];
 
     // whether we are operating in a dev or live environment
-    isDev: boolean;
+    isDev: boolean = false;
     // base URL for the API; will differ based on environment
     apiBaseUrl: string;
     // base URL for CRUD operations
@@ -18,7 +18,7 @@ module app.common {
 
     constructor(private $location,
                 private URLS) {
-      this.isDev = $location.absUrl().indexOf('localhost:8100') > -1;
+      this.isDev = $location.absUrl().indexOf('schlr.stamplayapp.com') === -1;
       this.apiBaseUrl = this.isDev ? URLS.DEV : URLS.PROD;
       this.apiCrudBaseUrl = this.apiBaseUrl + '/api/cobject/v1';
       this.loginUrl = this.apiBaseUrl + '/auth/v1/local/login';

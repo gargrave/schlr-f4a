@@ -145,6 +145,11 @@ module schlr.entries {
      */
     showEntryCreate(week: string, courseId: string) {
       // TODO: replace entry create/update modal
+      console.log('TODO: replace entry create/update modal');
+      console.log('week:');
+      console.log(week);
+      console.log('courseId:');
+      console.log(courseId);
       // this.entryModalSvc.showForCreate(this.activeTerm.id, week, courseId);
     }
 
@@ -163,8 +168,9 @@ module schlr.entries {
       this.buildLocalEntryList();
     }
 
-    showTermPopover($event): void {
+    showTermSelect($event): void {
       // TODO: replace term popover service
+      console.log('TODO: replace term popover service');
       // this.termPopoverSvc.show($event);
     }
 

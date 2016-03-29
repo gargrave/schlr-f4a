@@ -195,6 +195,22 @@ gulp.task('replace-dist', function() {
     .pipe(gulp.dest('dist/'));
 });
 
+/*==============================================
+ = server
+ ==============================================*/
+// Starts a test server, which you can view at http://localhost:8079
+gulp.task('server', function() {
+  gulp.src('./build')
+    .pipe($.webserver({
+      port: 8079,
+      host: 'localhost',
+      fallback: 'build/index.html',
+      livereload: false,
+      open: false
+    }));
+});
+
+
 /*=============================================
  = build tasks
  =============================================*/

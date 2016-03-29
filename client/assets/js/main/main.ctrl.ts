@@ -103,6 +103,14 @@ module schlr {
     finishInitialization(): void {
       this.initializing = false;
     }
+
+    /*==============================================
+     = globals
+     ==============================================*/
+
+    isDev(): boolean {
+      return this.mainSvc.isDev();
+    }
   }
 
   angular.module('schlr').controller('MainCtrl', MainCtrl);

@@ -23,7 +23,7 @@ module schlr.terms {
      =============================================*/
     afterQuerySuccess(res: any): void {
       this.entries = _.orderBy(this.entries, 'startDate', 'desc');
-      this.activeTerm = this.activeTerm || this.entries[1];
+      this.activeTerm = this.activeTerm || this.entries[0];
     }
 
     /*=============================================
@@ -49,8 +49,10 @@ module schlr.terms {
      = activeTerm methods
      =============================================*/
     setActiveTerm(term: any): void {
-      this.activeTerm = term;
-      this.apiUpdater.requestUpdate();
+      if (!_.isEqual(term, this.activeTerm)) {
+        this.activeTerm = term;
+        this.apiUpdater.requestUpdate();
+      }
     }
 
     getActiveTerm(): ITerm {

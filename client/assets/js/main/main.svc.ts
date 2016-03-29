@@ -5,7 +5,7 @@ module schlr {
 
     static $inject = [
       'TermsSvc', 'CoursesSvc', 'EntriesSvc',
-      'ApiUpdaterSvc'
+      'ApiUpdaterSvc', 'UrlsSvc'
     ];
 
     // whether the controller is currently in 'initializing' state
@@ -14,7 +14,8 @@ module schlr {
     constructor(private termsSvc: schlr.terms.TermsSvc,
                 private coursesSvc: schlr.courses.CoursesSvc,
                 private entriesSvc: schlr.entries.EntriesSvc,
-                private apiUpdater: app.common.ApiUpdaterSvc) {
+                private apiUpdater: app.common.ApiUpdaterSvc,
+                private urls: app.common.UrlsSvc) {
     }
 
     /*==============================================
@@ -86,6 +87,13 @@ module schlr {
       } else {
         this.finish();
       }
+    }
+
+    /*==============================================
+     = globals
+     ==============================================*/
+    isDev(): boolean {
+      return this.urls.isDev;
     }
   }
 

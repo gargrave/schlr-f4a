@@ -11,7 +11,14 @@
 <div class="grid-frame vertical">
   <div class="grid-content shrink" style="padding: 0;">
     <ul class="primary condense menu-bar">
-      <li><a><strong>SCHLR</strong></a></li>
+      <li>
+        <a>
+          <strong>
+            SCHLR
+            <span ng-bind="'(dev)'" ng-if="main.isDev()" ng-cloak></span>
+          </strong>
+        </a>
+      </li>
     </ul>
   </div>
 
@@ -45,11 +52,11 @@
 <script src="./assets/js/common/apiUpdater.svc.js"></script>
 <script src="./assets/js/common/urls.svc.js"></script>
 
-
 <script src="./assets/js/main/main.ctrl.js"></script>
 <script src="./assets/js/main/main.svc.js"></script>
 
 <script src="./assets/js/terms/terms.ctrl.js"></script>
+<script src="./assets/js/terms/termsSelectModal.ctrl.js"></script>
 <script src="./assets/js/terms/terms.svc.js"></script>
 
 <script src="./assets/js/entries/entries.ctrl.js"></script>

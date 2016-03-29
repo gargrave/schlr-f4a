@@ -84,7 +84,8 @@ a > {
 }
 
 .grid-content-main {
-  background-color: #f1f1f1;
+  //background-color: #f1f1f1;
+  background-color: lighten($primaryExtraLight, 12);
   .card {
     @extend .card-basic;
     border: 1px solid #e6e6e6;
@@ -117,7 +118,7 @@ a > {
 .list-view-card {
   cursor: pointer;
   :hover {
-    background-color: $primaryExtraLight;
+    background-color: #eee;
   }
 }
 
@@ -125,6 +126,12 @@ a > {
 .entry-finished {
   color: $text-muted;
   text-decoration: line-through;
+}
+
+// header area for cards in entry list view
+.entry-card-header {
+  padding: .65rem;
+  background-color: complement($primaryExtraLight);
 }
 
 #left-menu {

@@ -6,5 +6,6 @@ module app.common {
     clearAll(): void;
     finish(): void;
     isLoading(): boolean;
+    isDev(): boolean;
   }
 }

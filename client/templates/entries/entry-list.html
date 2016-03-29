@@ -6,23 +6,10 @@ controller: EntriesCtrl as vm
 
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
-  <div class="center title">Week 5 (MOCK DATA)</div>
-  <!-- "previous week" button -->
-  <span class="left">
-    <a href="">
-      <img zf-iconic="" icon="chevron" data-direction="left" size="small"
-           class="iconic-color-secondary icon-white">
-      Prev
-    </a>
-  </span>
-  <!-- "next week" button -->
-  <span class="right">
-    <a href="">
-      Next
-      <img zf-iconic="" icon="chevron" data-direction="right" size="small"
-           class="iconic-color-secondary icon-white">
-    </a>
-  </span>
+  <div class="center title" zf-open="termSelectModal">
+    <a href="" ng-bind="!vm.working && vm.activeTerm.name" ng-if="vm.activeTerm" ng-cloak></a>
+    <a href="" ng-if="!vm.working && !vm.activeTerm" ng-cloak>Select Term</a>
+  </div>
 </div><!-- /sub-title bar -->
 
 
@@ -58,43 +45,75 @@ controller: EntriesCtrl as vm
     <div ng-hide="week.hidden" ng-cloak>
       <div ng-repeat="course in week.courses">
 
-        <!-- use each course name as a sub-divider -->
+        <!-- use each course name as a sub-divider
         <div ng-click="vm.showEntryCreate(week.weekNumber, course.id)">
           <span ng-bind="course.name"></span>
           <small ng-if="!course.entries.length" ng-cloak>
             (no entries)
           </small>
-        </div>
+        </div>-->
 
-        <!-- each individual entry -->
-        <div class="card list-view-card"
-             ng-repeat="entry in course.entries"
-             ng-click="vm.updateFinishedState(entry)"
-             ng-model="entry.finished">
-          <div class="card-section">
-            <img zf-iconic="" icon="circle-check" size="small" class="float-right"
-                 ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
-            <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
+        <div class="card">
+          <div class="card-divider entry-card-header">
+            <strong ng-bind="course.name"></strong>
+            <a href="" zf-open="entryCreateModal"
+               ng-click="vm.showEntryCreate(week.weekNumber, course.id)">
+              (add)
+            </a>
+          </div>
+
+          <!-- each individual entry -->
+          <div class="list-view-card">
+            <div class="card-section"
+                 ng-repeat="entry in course.entries"
+                 ng-click="vm.updateFinishedState(entry)"
+                 ng-model="entry.finished">
+              <img zf-iconic="" icon="circle-check" size="small" class="float-right"
+                   ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
+              <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
+            </div><!-- /card-section -->
           </div>
         </div>
 
       </div>
     </div><!-- /week body -->
-
-
   </div><!-- /ng-repeat -->
-
-  <div class="title-bar content-subtitle content-subtitle-first">
-    <div class="left title">CIS-233W (MOCK DATA)</div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>ASSN: Assignment 5</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-section">
-      <p>READ: Chapter 5</p>
-    </div>
-  </div>
 </div><!-- /entries list, auth -->
+
+
+<!-- term change modal -->
+<div zf-modal="" id="termSelectModal" class="collapse">
+  <div class="grid-block vertical" ng-controller="TermSelectModalCtrl as modalVM">
+
+    <div class="primary title-bar">
+      <div class="center title">Change Term</div>
+    </div>
+
+    <div class="grid-content padding" style="padding-top: 1rem;">
+      <section class="block-list">
+        <ul>
+          <li ng-repeat="term in modalVM.terms()">
+            <a href="" zf-close="" ng-bind="term.name"
+               ng-click="modalVM.onTermSelected(term)"></a>
+          </li>
+        </ul>
+      </section>
+      <a zf-close="" class="button">Cancel</a>
+    </div><!-- /grid-content -->
+  </div><!-- /grid-block -->
+</div><!-- /modal -->
+
+
+<!-- entry create modal -->
+<div zf-modal="" id="entryCreateModal" class="collapse">
+  <div class="grid-block vertical" ng-controller="TermSelectModalCtrl as modalVM">
+
+    <div class="primary title-bar">
+      <div class="center title">Add New Entry</div>
+    </div>
+
+    <div class="grid-content padding" style="padding-top: 1rem;">
+      <a zf-close="" class="button">Cancel</a>
+    </div><!-- /grid-content -->
+  </div><!-- /grid-block -->
+</div><!-- /modal -->
