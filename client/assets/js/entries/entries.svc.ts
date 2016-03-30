@@ -21,7 +21,7 @@ module schlr.entries {
     }
 
     createEntry(data: any): ng.IPromise<any> {
-      return this.save({
+      return this.save2({
         name: data.name,
         course: this.newEntryCourseId,
         week: this.newEntryWeek,
@@ -49,13 +49,13 @@ module schlr.entries {
           .then((postRes) => {
             let entry = postRes.data;
             this.entries.push(entry);
-            deferred.resolve(entry);
           }, (err) => {
             deferred.reject(err);
           })
           .finally(() => {
             // once we receive all responses, resolve!
             if (++received >= expected) {
+              deferred.resolve(true);
             }
           });
       });
@@ -85,13 +85,23 @@ module schlr.entries {
       };
     }
 
-    getDataForCreate(entry: any): any {
+    getDataForCreate(data: any): any {
+      return {
+        name: data.name,
+        course: this.newEntryCourseId,
+        week: this.newEntryWeek,
+        term: this.newEntryTerm,
+        finished: false
+      };
+    }
+
+    buildDataForUpdate(entry: any): any {
       return {
         name: entry.name,
-        week: entry.week,
+        week: this.newEntryWeek,
         term: this.newEntryTerm,
         course: this.newEntryCourseId,
-        finished: false
+        finished: entry.finished
       };
     }
 

@@ -1,6 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 module schlr.entries {
 
+  import ICourse = schlr.courses.ICourse;
+
   export interface IEntry extends app.common.IGenericApiRes {
     course?: string;
     term?: string;
@@ -57,7 +59,7 @@ module schlr.entries {
     }
 
     /*=============================================
-     = ionic view callbacks
+     = view init methods
      =============================================*/
     initListView(): void {
       if (!this.mainSvc.isLoading()) {
@@ -86,7 +88,6 @@ module schlr.entries {
       this.termsSvc.query()
         .then((res) => {
           this.activeTerm = this.termsSvc.getActiveTerm();
-          // let params = '?term=' + this.activeTerm.id;
           this.dataSvc.setParamsString('term=' + this.activeTerm.id);
           this.find(false);
         });
@@ -138,59 +139,29 @@ module schlr.entries {
     }
 
     /*=============================================
-     = Modal/Popover methods
-     =============================================*/
-    /**
-     * Shows the entry creation view.
-     */
-    showEntryCreate(week: string, courseId: string) {
-      // TODO: replace entry create/update modal
-      console.log('TODO: replace entry create/update modal');
-      console.log('week:');
-      console.log(week);
-      console.log('courseId:');
-      console.log(courseId);
-      // this.entryModalSvc.showForCreate(this.activeTerm.id, week, courseId);
-    }
-
-    /**
-     * Shows the entry update view.
-     */
-    showEntryUpdate(entry: IEntry) {
-      // TODO: replace entry create/update modal
-      // this.entryModalSvc.showForUpdate(entry);
-    }
-
-    /**
-     * Callback method for modals being hidden.
-     */
-    onModalHidden(): void {
-      this.buildLocalEntryList();
-    }
-
-    showTermSelect($event): void {
-      // TODO: replace term popover service
-      console.log('TODO: replace term popover service');
-      // this.termPopoverSvc.show($event);
-    }
-
-    /*=============================================
      = Entry mgmt methods
      =============================================*/
     /**
      * Reverses the state of 'finished' for the specified Entry.
-     * @param {IEntry} clickedEntry - The Entry whose 'finished' state need to be toggled.
+     * @param {IEntry} entry - The Entry whose 'finished' state need to be toggled.
      */
-    updateFinishedState(clickedEntry: IEntry): void {
-      this.entry = clickedEntry;
+    updateFinishedState(entry: any): void {
+      this.entriesSvc.setNewEntryParams(entry.term[0], entry.week, entry.course.id);
+      this.entry = entry;
       this.entry.finished = !this.entry.finished;
+
       let week = _.find(this.weekContainers, (w: WeekContainer) => {
-        return w.weekNumber === clickedEntry.week;
+        return w.weekNumber === entry.week;
       });
       if (week) {
         week.updateFinishedCount(this.entry.finished);
       }
-      this.entriesSvc.update(this.entry.id, this.getDataForUpdate());
+      this.entriesSvc.update(this.entry.id, this.entriesSvc.buildDataForUpdate(this.entry));
+    }
+
+    onEntryEditClick(entry: any): void {
+      this.entry = entry;
+      this.gotoUpdateView(entry.id);
     }
 
     /*=============================================
@@ -212,10 +183,21 @@ module schlr.entries {
         });
       });
 
+      this.working = true;
       this.entriesSvc.multiSave(newEntriesData)
         .then((res) => {
           this.buildLocalEntryList();
+        })
+        .finally(() => {
+          this.working = false;
         });
+    }
+
+    addEntry(week: WeekContainer, course: ICourse): void {
+      this.working = true;
+      this.entriesSvc.setNewEntryParams(this.activeTerm.id, week.weekNumber, course.id);
+      this.entry = this.entriesSvc.getDataForCreate({name: `New entry for ${course.name}`});
+      this.create();
     }
 
     /**
@@ -235,24 +217,10 @@ module schlr.entries {
     /*=============================================
      = CRUD helper methods
      =============================================*/
-    submit(form: any): void {
-      this.create(form);
-    }
-
     canSaveUpdate(): boolean {
       return this.auth.isLoggedIn() &&
         (this.entry.name !== this.originalEntry.name ||
         this.entry.finished !== this.originalEntry.finished);
-    }
-
-    getDataForUpdate(): any {
-      return {
-        name: this.entry.name,
-        week: this.entry.week,
-        term: this.entry.term,
-        course: this.entry.course.id,
-        finished: this.entry.finished
-      };
     }
 
     afterFind(res: any): void {
@@ -304,6 +272,18 @@ module schlr.entries {
 
       // sort by week, with most current first
       this.weekContainers = _.orderBy(this.weekContainers, 'weekNumber', 'desc');
+    }
+
+    getDataForUpdate(): void {
+      return this.entriesSvc.buildDataForUpdate(this.entry);
+    }
+
+    afterUpdate(res: any): void {
+      this.gotoListView();
+    }
+
+    cancel(): void {
+      this.gotoListView();
     }
   }
 

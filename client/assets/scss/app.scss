@@ -11,6 +11,8 @@ $primaryExtraLight: desaturate(lighten($primary-color, 68%), 68%);
 $border: 1px solid $primaryExtraLight;
 $text-muted: #878787;
 
+$maxCardWidth: 660px;
+
 /*======================================
  = Bootstrap mocks
  ======================================*/
@@ -52,6 +54,12 @@ a > {
   li {
     border-bottom: $border;
   }
+}
+
+// for card that need to be horizontally centered
+.card-centered {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /*=============================================
@@ -128,10 +136,27 @@ a > {
   text-decoration: line-through;
 }
 
-// header area for cards in entry list view
-.entry-card-header {
-  padding: .65rem;
-  background-color: complement($primaryExtraLight);
+// cards for entry names (i.e. dividers within each week)
+.entry-course-card {
+  @extend .card-centered;
+  color: white;
+  font-weight: bold;
+  max-width: $maxCardWidth;
+  a {
+    color: white;
+  }
+  .card-divider {
+    background-color: $primaryMed;
+  }
+}
+
+// card for actual entry content (i.e. in entry list view)
+.entry-card {
+  @extend .card-centered;
+  max-width: $maxCardWidth * .95;
+  :hover {
+    background-color: #eee;
+  }
 }
 
 #left-menu {

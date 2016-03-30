@@ -10,6 +10,11 @@ controller: EntriesCtrl as vm
     <a href="" ng-bind="!vm.working && vm.activeTerm.name" ng-if="vm.activeTerm" ng-cloak></a>
     <a href="" ng-if="!vm.working && !vm.activeTerm" ng-cloak>Select Term</a>
   </div>
+  <span class="right">
+    <a href="" zf-open="entryActionsModal">
+      <strong>Actions</strong>
+    </a>
+  </span>
 </div><!-- /sub-title bar -->
 
 
@@ -21,7 +26,6 @@ controller: EntriesCtrl as vm
 
 <!-- entries list, auth -->
 <div ng-if="main.isLoggedIn()" ng-init="vm.initListView()">
-
   <div ng-repeat="week in vm.weekContainers | orderBy:'-number'">
 
     <!-- week number display as divider -->
@@ -40,42 +44,32 @@ controller: EntriesCtrl as vm
       </div>
     </div><!-- /week  divider -->
 
-
     <!-- week body -->
     <div ng-hide="week.hidden" ng-cloak>
       <div ng-repeat="course in week.courses">
 
-        <!-- use each course name as a sub-divider
-        <div ng-click="vm.showEntryCreate(week.weekNumber, course.id)">
-          <span ng-bind="course.name"></span>
-          <small ng-if="!course.entries.length" ng-cloak>
-            (no entries)
-          </small>
-        </div>-->
-
-        <div class="card">
-          <div class="card-divider entry-card-header">
-            <strong ng-bind="course.name"></strong>
-            <a href="" zf-open="entryCreateModal"
-               ng-click="vm.showEntryCreate(week.weekNumber, course.id)">
-              (add)
-            </a>
-          </div>
-
-          <!-- each individual entry -->
-          <div class="list-view-card">
-            <div class="card-section"
-                 ng-repeat="entry in course.entries"
-                 ng-click="vm.updateFinishedState(entry)"
-                 ng-model="entry.finished">
-              <img zf-iconic="" icon="circle-check" size="small" class="float-right"
-                   ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
-              <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
-            </div><!-- /card-section -->
+        <div class="card entry-course-card">
+          <div class="card-divider">
+            <span ng-bind="course.name"></span>
+            <a href="" class="float-right" ng-click="vm.addEntry(week, course)">Add</a>
           </div>
         </div>
 
-      </div>
+        <div class="card entry-card" ng-repeat="entry in course.entries | orderBy:'finished'"
+             ng-model="entry.finished">
+
+          <div class="card-section">
+            <!-- checkbox icon, for finished status -->
+            <img zf-iconic="" icon="circle-check" size="small" style="margin-right: .5rem;"
+                 ng-click="vm.updateFinishedState(entry)"
+                 ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
+
+            <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
+            <img zf-iconic="" icon="action" class="float-right" size="small" ng-click="vm.onEntryEditClick(entry)">
+          </div><!-- /nested card-section -->
+        </div><!-- /nested card -->
+
+      </div><!-- /ng-repeat course -->
     </div><!-- /week body -->
   </div><!-- /ng-repeat -->
 </div><!-- /entries list, auth -->
@@ -104,15 +98,20 @@ controller: EntriesCtrl as vm
 </div><!-- /modal -->
 
 
-<!-- entry create modal -->
-<div zf-modal="" id="entryCreateModal" class="collapse">
-  <div class="grid-block vertical" ng-controller="TermSelectModalCtrl as modalVM">
+<!-- entry actions modal -->
+<div zf-modal="" id="entryActionsModal" class="collapse">
+  <div class="grid-block vertical">
 
     <div class="primary title-bar">
-      <div class="center title">Add New Entry</div>
+      <div class="center title">Select an Action</div>
     </div>
 
     <div class="grid-content padding" style="padding-top: 1rem;">
+      <section class="block-list">
+        <ul>
+          <li><a href="" zf-close="" ng-click="vm.addWeek()">Add a Week</a></li>
+        </ul>
+      </section>
       <a zf-close="" class="button">Cancel</a>
     </div><!-- /grid-content -->
   </div><!-- /grid-block -->

@@ -77,6 +77,23 @@ module app.common {
       return deferred.promise;
     }
 
+    save2(data: any): ng.IPromise<any> {
+      let deferred = this.$q.defer();
+
+      // send request
+      this.$http.post(this.crudApiUrl, data, this.auth.getRequestHeaders())
+        .then((postRes) => {
+          let entry = postRes.data;
+          this.afterSaveSuccess(entry);
+          deferred.resolve(entry);
+        }, (err) => {
+          deferred.reject(err);
+        })
+        .finally(() => {
+        });
+      return deferred.promise;
+    }
+
     /**
      * Runs a GET request to fetch all resources of this type for the current owner.
      *
@@ -268,7 +285,11 @@ module app.common {
       };
     }
 
-    abstract getDataForCreate(entry: any): any;
+    getDataForCreate(entry: any): any {
+    }
+
+    buildDataForUpdate(entry: any): any {
+    }
 
     /*=============================================
      = utility methods

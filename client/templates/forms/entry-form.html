@@ -1,0 +1,52 @@
+<!-- ngMessages templates -->
+<script type="text/ng-template" id="error-messages">
+  <div ng-message="required">This field is required.</div>
+  <div ng-message="minlength">Must be at least 3 characters long.</div>
+</script>
+
+<form method="POST" id="entryForm" name="entryForm" novalidate>
+  <!-- entry name input -->
+  <label>Title:
+    <!-- name validation messages -->
+    <span class="validation-error" role="alert"
+          ng-messages="entryForm.name.$error"
+          ng-show="entryForm.$submitted && entryForm.name.$invalid">
+      <span ng-messages-include="error-messages"></span>
+    </span>
+    <input name="name" id="name" type="text"
+           minlength="3" maxlength="100"
+           placeholder="ASSN: Assignment 1"
+           ng-model="vm.entry.name" required>
+  </label>
+
+
+  <div>
+    <!-- submit button for 'create' view -->
+    <button class="button"
+            ng-click="vm.submit(entryForm)"
+            ng-if="vm.isCreateView()" ng-cloak
+            ng-disabled="vm.working">
+      Submit
+    </button>
+
+    <!-- submit button for 'update' view -->
+    <button class="button success"
+            ng-click="vm.submit(entryForm)"
+            ng-if="vm.isUpdateView()" ng-cloak
+            ng-class="{ disabled: !vm.canSaveUpdate() }"
+            ng-disabled="vm.working || !vm.canSaveUpdate()">
+      Update
+    </button>
+
+    <!-- cancel button -->
+    <a class="hollow button" href="" ng-click="vm.cancel()">
+      Cancel
+    </a>
+
+    <!-- delete button -->
+    <a class="alert button float-right" href="" ng-click="vm.remove()"
+       ng-if="vm.isUpdateView()" ng-cloak>
+      Delete
+    </a>
+  </div>
+</form>

@@ -24,7 +24,6 @@ module app.common {
     /*=============================================
      = view state-checking methods
      =============================================*/
-
     isListView(): boolean {
       return this.$state.is(`home.${this.moduleName}-list`);
     }
@@ -42,7 +41,7 @@ module app.common {
     }
 
     /*=============================================
-     = ionic view callbacks
+     = view init methods
      =============================================*/
     initListView(): void {
       if (!this.mainSvc.isLoading()) {
@@ -70,14 +69,16 @@ module app.common {
     /*=============================================
      = CRUD methods
      =============================================*/
-    create(form): void {
+    create(form?): void {
       if (this.auth.isLoggedIn()) {
-        form.$submitted = true;
-        if (form.$valid) {
+        if (form) {
+          form.$submitted = true;
+        }
+        if (!form || (form && form.$valid)) {
           this.working = true;
-          this.dataSvc.save(this.entry)
+          this.dataSvc.save2(this.entry)
             .then((res) => {
-              this.gotoListView();
+              this.afterCreate(res);
               this.working = false;
             });
         }
@@ -91,6 +92,8 @@ module app.common {
         this.dataSvc.query(forceRefresh)
           .then((res) => {
             this.afterFind(res);
+          })
+          .finally(() => {
             this.working = false;
           });
       }
@@ -107,18 +110,19 @@ module app.common {
       }
     }
 
-    update(form): void {
+    update(form?): void {
       if (this.auth.isLoggedIn()) {
-        form.$submitted = true;
-
-        if (form.$valid) {
+        if (form) {
+          form.$submitted = true;
+        }
+        if (!form || (form && form.$valid)) {
           if (this.canSaveUpdate()) {
             const data: any = this.getDataForUpdate();
             const id: string = this.entry.id;
             this.working = true;
             this.dataSvc.update(id, data)
               .then((res) => {
-                this.gotoDetailView(res.id);
+                this.afterUpdate(res);
                 this.working = false;
               });
           }
@@ -158,7 +162,17 @@ module app.common {
 
     abstract canSaveUpdate(): boolean;
 
-    abstract getDataForUpdate(): any;
+    getDataForUpdate(): any {
+    }
+
+    // do anything needed after a 'create()' call
+    afterCreate(res: any): void {
+      if (!this.isListView()) {
+        this.gotoListView();
+      } else {
+        this.find();
+      }
+    }
 
     // do anything needed after a 'find()' call, e.g. list view
     afterFind(res: any): void {
@@ -171,13 +185,13 @@ module app.common {
       this.originalEntry = angular.copy(this.entry);
     }
 
+    afterUpdate(res: any): void {
+      this.gotoDetailView(res.id);
+    }
+
     /*==============================================
      = navigation methods
      ==============================================*/
-    /**
-     * Called when the 'pull-to-refresh' feature is used. By default, it
-     * simply reloads the list view.
-     */
     refresh(): void {
       if (this.auth.isLoggedIn()) {
         this.entries = [];
@@ -188,7 +202,6 @@ module app.common {
             this.working = false;
           })
           .finally(() => {
-            this.$scope.$broadcast('scroll.refreshComplete');
           });
       }
     }
@@ -203,7 +216,6 @@ module app.common {
             this.working = false;
           })
           .finally(() => {
-            this.$scope.$broadcast('scroll.refreshComplete');
           });
       }
     }
@@ -246,6 +258,20 @@ module app.common {
     }
 
     /**
+     * Moves the current view to the module's 'create' view.
+     */
+    gotoCreateView(): void {
+      this.$state.go(`home.${this.moduleName}-create`);
+    }
+
+    /**
+     * Moves the current view to the module's 'update' view.
+     */
+    gotoUpdateView(id: string): void {
+      this.$state.go(`home.${this.moduleName}-update`, {id: id});
+    }
+
+    /**
      * Toggles whether the current view's search bar should be shown.
      */
     toggleShowSearch(): void {
@@ -255,7 +281,6 @@ module app.common {
     /*==============================================
      = globals
      ==============================================*/
-
     isDev(): boolean {
       return this.mainSvc.isDev();
     }

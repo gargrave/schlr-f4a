@@ -1,0 +1,43 @@
+---
+name: home.entry-update
+url: entries/update/:id
+controller: EntriesCtrl as vm
+---
+
+<div ng-init="vm.initUpdateView()">
+  <!-- sub-title bar -->
+  <div class="title-bar entries-title-bar">
+    <div class="center title">
+      Update Course:
+      <span ng-bind="::vm.entry.name"></span>
+    </div>
+    <!-- link back to courses list -->
+    <span class="left">
+      <a href="" ui-sref="home.entry-detail({ id: vm.entry.id })">
+        <img zf-iconic="" icon="chevron" data-direction="left" size="small"
+             class="iconic-color-secondary icon-white">
+        Cancel
+      </a>
+    </span>
+  </div>
+  <br>
+
+
+  <div class="grid-block align-center">
+    <div class="grid-content medium-6">
+
+      <!-- entry list, no-auth -->
+      <div ng-if="!main.isLoggedIn()">
+        <p>You are not logged in.</p>
+      </div><!-- /courses list, no-auth -->
+
+      <!-- entry create form, auth -->
+      <div class="card" ng-if="main.isLoggedIn()">
+        <div class="card-section">
+          <div ng-include="'templates/forms/entry-form.html'"></div>
+        </div>
+      </div><!-- /entry create form, auth -->
+
+    </div>
+  </div>
+</div>
