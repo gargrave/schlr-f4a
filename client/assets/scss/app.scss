@@ -36,9 +36,21 @@ $maxCardWidth: 660px;
  = F4A overrides
  =============================================*/
 .card {
+  max-width: $maxCardWidth;
+  border-radius: 0 !important;
   p {
     margin-bottom: 0;
   }
+  .card-divider, .card-section {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+  }
+}
+
+// for card that need to be horizontally centered
+.card-centered {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 a > {
@@ -56,15 +68,22 @@ a > {
   }
 }
 
-// for card that need to be horizontally centered
-.card-centered {
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 /*=============================================
  = custom styles
  =============================================*/
+/*
+body styles
+*/
+// main content area
+.grid-content-main {
+  background-color: $primaryExtraLight;
+  padding-bottom: 2rem !important;
+  .card {
+    @extend .card-basic;
+    border: 1px solid #e6e6e6;
+  }
+}
+
 .validation-error {
   color: red;
   font-size: 14px;
@@ -91,14 +110,7 @@ a > {
   box-shadow: 0 1px 1px rgba(1, 1, 1, 0.2);
 }
 
-.grid-content-main {
-  //background-color: #f1f1f1;
-  background-color: lighten($primaryExtraLight, 12);
-  .card {
-    @extend .card-basic;
-    border: 1px solid #e6e6e6;
-  }
-}
+
 
 .content-subtitle {
   @extend .card-basic;
@@ -136,12 +148,25 @@ a > {
   text-decoration: line-through;
 }
 
+
+
+#left-menu {
+  border-right: $border;
+  box-shadow: 0 1px 5px rgba(1, 1, 1, 0.1);
+}
+
+/*
+card styles
+*/
+
 // cards for entry names (i.e. dividers within each week)
 .entry-course-card {
   @extend .card-centered;
   color: white;
   font-weight: bold;
-  max-width: $maxCardWidth;
+  border-color: darken($primaryMed, 3%) !important;
+  margin-bottom: 0 !important;
+  margin-top: 18px !important;
   a {
     color: white;
   }
@@ -153,13 +178,10 @@ a > {
 // card for actual entry content (i.e. in entry list view)
 .entry-card {
   @extend .card-centered;
-  max-width: $maxCardWidth * .95;
+  border-color: #B4CCBF !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
   :hover {
     background-color: #eee;
   }
-}
-
-#left-menu {
-  border-right: $border;
-  box-shadow: 0 1px 5px rgba(1, 1, 1, 0.1);
 }
