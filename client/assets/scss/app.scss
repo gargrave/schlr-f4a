@@ -134,14 +134,6 @@ body styles
   }
 }
 
-// card for displaying term details in list view
-.list-view-card {
-  cursor: pointer;
-  :hover {
-    background-color: #eee;
-  }
-}
-
 // style for entry that are marked as 'finished'
 .entry-finished {
   color: $text-muted;
@@ -158,6 +150,15 @@ body styles
 /*
 card styles
 */
+
+// card for displaying term details in list view
+.list-view-card {
+  @extend .card-centered;
+  cursor: pointer;
+  :hover {
+    background-color: #eee;
+  }
+}
 
 // cards for entry names (i.e. dividers within each week)
 .entry-course-card {

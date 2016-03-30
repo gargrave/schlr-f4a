@@ -33,8 +33,11 @@ controller: CoursesCtrl as vm
       <div class="card list-view-card" ng-repeat="course in term.courses"
            ui-sref="home.course-detail({ id: course.id })">
         <div class="card-section">
-          <h5 ng-bind="course.name">CIS-195P</h5>
-          <p class="text-muted" ng-bind="course.fullName"></p>
+          <h5>
+            <span ng-bind="course.name"></span>
+            <br>
+            <span class="text-muted" ng-bind="course.fullName"></span>
+          </h5>
         </div>
       </div>
 

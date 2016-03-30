@@ -10,8 +10,7 @@ module schlr.terms {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'TermsSvc',
-      'MainSvc', 'ApiUpdaterSvc'
+      'AuthSvc', 'TermsSvc', 'MainSvc', 'ApiUpdaterSvc'
     ];
 
     constructor($scope,
@@ -20,12 +19,8 @@ module schlr.terms {
                 auth: auth.AuthSvc,
                 dataSvc: TermsSvc,
                 mainSvc: schlr.MainSvc,
-                private apiUpdater: app.common.ApiUpdaterSvc) {
-      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, 'term');
-      // add listener for master service updates
-      apiUpdater.listenForAfterUpdate(() => {
-        this.find();
-      });
+                apiUpdater: app.common.ApiUpdaterSvc) {
+      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, apiUpdater, 'term');
     }
 
     /*=============================================

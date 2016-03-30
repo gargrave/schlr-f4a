@@ -16,9 +16,32 @@ module app.common {
                 protected auth: auth.AuthSvc,
                 protected dataSvc: app.common.AbstractSvc,
                 protected mainSvc: app.common.IMainSvc,
+                protected apiUpdater: app.common.ApiUpdaterSvc,
                 protected moduleName: string) {
       this.working = true;
       this.showSearch = false;
+
+      // add listeners for master service updates
+      apiUpdater.listenForBeforeUpdate(() => {
+        this.onBeforeApiUpdate();
+      });
+      apiUpdater.listenForAfterUpdate(() => {
+        this.onAfterApiUpdate();
+      });
+    }
+
+    /*==============================================
+     = API update callbacks
+     ==============================================*/
+    onBeforeApiUpdate() {
+    }
+
+    onAfterApiUpdate() {
+      if (this.isListView()) {
+        this.find();
+      } else if (this.isDetailView() || this.isUpdateView()) {
+        this.findOne();
+      }
     }
 
     /*=============================================
@@ -199,9 +222,9 @@ module app.common {
         this.dataSvc.query(true)
           .then((res) => {
             this.afterFind(res);
-            this.working = false;
           })
           .finally(() => {
+            this.working = false;
           });
       }
     }
@@ -213,9 +236,9 @@ module app.common {
         this.dataSvc.get(this.$stateParams['id'], true)
           .then((res) => {
             this.afterFindOne(res);
-            this.working = false;
           })
           .finally(() => {
+            this.working = false;
           });
       }
     }
@@ -243,6 +266,9 @@ module app.common {
       }
     }
 
+    /*==============================================
+     = navigation methods
+     ==============================================*/
     /**
      * Moves the current view to the module's 'list' view.
      */
@@ -271,6 +297,9 @@ module app.common {
       this.$state.go(`home.${this.moduleName}-update`, {id: id});
     }
 
+    /*==============================================
+     = search methods
+     ==============================================*/
     /**
      * Toggles whether the current view's search bar should be shown.
      */

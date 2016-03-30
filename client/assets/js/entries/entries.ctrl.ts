@@ -25,8 +25,8 @@ module schlr.entries {
 
     static $inject = [
       '$scope', '$state', '$stateParams',
-      'AuthSvc', 'EntriesSvc', 'MainSvc',
-      'CoursesSvc', 'TermsSvc', 'ApiUpdaterSvc'
+      'AuthSvc', 'EntriesSvc', 'MainSvc', 'ApiUpdaterSvc',
+      'CoursesSvc', 'TermsSvc'
     ];
 
     weekContainers: any;
@@ -42,31 +42,17 @@ module schlr.entries {
                 auth: auth.AuthSvc,
                 dataSvc: EntriesSvc,
                 mainSvc: schlr.MainSvc,
+                apiUpdater: app.common.ApiUpdaterSvc,
                 private coursesSvc: schlr.courses.CoursesSvc,
-                private termsSvc: schlr.terms.TermsSvc,
-                private apiUpdater: app.common.ApiUpdaterSvc) {
-      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, 'entry');
+                private termsSvc: schlr.terms.TermsSvc) {
+      super($scope, $state, $stateParams, auth, dataSvc, mainSvc, apiUpdater, 'entry');
       // dataSvc as EntriesSvc for local use
       this.entriesSvc = <EntriesSvc>dataSvc;
-
-      apiUpdater.listenForBeforeUpdate(() => {
-        this.onBeforeApiUpdate();
-      });
-
-      apiUpdater.listenForAfterUpdate(() => {
-        this.onAfterApiUpdate();
-      });
     }
 
-    /*=============================================
-     = view init methods
-     =============================================*/
-    initListView(): void {
-      if (!this.mainSvc.isLoading()) {
-        this.buildLocalEntryList();
-      }
-    }
-
+    /*==============================================
+     = API update callbacks
+     ==============================================*/
     onBeforeApiUpdate() {
       let activeTermOnSvc = this.termsSvc.getActiveTerm();
       if (activeTermOnSvc !== undefined && this.activeTerm !== activeTermOnSvc) {
@@ -79,6 +65,15 @@ module schlr.entries {
 
     onAfterApiUpdate() {
       this.buildLocalEntryList();
+    }
+
+    /*=============================================
+     = view init methods
+     =============================================*/
+    initListView(): void {
+      if (!this.mainSvc.isLoading()) {
+        this.buildLocalEntryList();
+      }
     }
 
     /*=============================================

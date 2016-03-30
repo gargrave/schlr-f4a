@@ -7,13 +7,13 @@ controller: EntriesCtrl as vm
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
   <div class="center title" zf-open="termSelectModal">
-    <a href="" ng-bind="!vm.working && vm.activeTerm.name" ng-if="vm.activeTerm" ng-cloak></a>
+    <a href="" ng-bind="vm.activeTerm.name" ng-if="!vm.working && vm.activeTerm" ng-cloak></a>
     <a href="" ng-if="!vm.working && !vm.activeTerm" ng-cloak>Select Term</a>
   </div>
   <span class="right">
-    <a href="" zf-open="entryActionsModal">
-      <strong>Actions</strong>
-    </a>
+    <img class="iconic-color-secondary"
+         zf-iconic="" icon="cog" size="small"
+         zf-open="entryActionsModal">
   </span>
 </div><!-- /sub-title bar -->
 

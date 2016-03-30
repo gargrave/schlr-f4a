@@ -4,7 +4,7 @@ url: courses/detail/:id
 controller: CoursesCtrl as vm
 ---
 
-<div ng-init="vm.initDetailView()">
+<div>
   <!-- sub-title bar -->
   <div class="title-bar entries-title-bar">
     <div class="center title">
@@ -38,7 +38,7 @@ controller: CoursesCtrl as vm
       </div><!-- /terms list, no-auth -->
 
       <!-- term create form, auth -->
-      <div class="card" ng-if="main.isLoggedIn()">
+      <div class="card" ng-if="main.isLoggedIn()" ng-init="vm.initDetailView()">
         <div class="card-section">
 
           <p><strong>Title: </strong><span ng-bind="vm.entry.name"></span></p>
