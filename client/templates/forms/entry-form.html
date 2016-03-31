@@ -22,29 +22,29 @@
 
   <div>
     <!-- submit button for 'create' view -->
-    <button class="button"
+    <a class="button success"
             ng-click="vm.submit(entryForm)"
-            ng-if="vm.isCreateView()" ng-cloak
+            ng-if="!vm.isCreateView()" ng-cloak
             ng-disabled="vm.working">
       Submit
-    </button>
+    </a>
 
     <!-- submit button for 'update' view -->
-    <button class="button success"
+    <a class="button success"
             ng-click="vm.submit(entryForm)"
-            ng-if="vm.isUpdateView()" ng-cloak
+            ng-if="!vm.isUpdateView()" ng-cloak
             ng-class="{ disabled: !vm.canSaveUpdate() }"
             ng-disabled="vm.working || !vm.canSaveUpdate()">
       Update
-    </button>
+    </a>
 
     <!-- cancel button -->
-    <a class="hollow button" href="" ng-click="vm.cancel()">
+    <a class="button hollow" href="" ng-click="vm.cancel()">
       Cancel
     </a>
 
     <!-- delete button -->
-    <a class="alert button float-right" href="" ng-click="vm.remove()"
+    <a class="button alert float-right" href="" ng-click="vm.remove()"
        ng-if="vm.isUpdateView()" ng-cloak>
       Delete
     </a>

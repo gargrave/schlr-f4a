@@ -59,16 +59,21 @@ controller: EntriesCtrl as vm
              ng-model="entry.finished">
 
           <div class="card-section">
+
             <!-- checkbox icon, for finished status -->
             <img zf-iconic="" icon="circle-check" size="small" style="margin-right: .5rem;"
                  ng-click="vm.updateFinishedState(entry)"
                  ng-class="{'iconic-color-success': entry.finished, 'iconic-color-secondary': !entry.finished}">
 
+            <!-- entry text -->
             <span ng-class="{'entry-finished': entry.finished}" ng-bind="entry.name"></span>
-            <img zf-iconic="" icon="action" class="float-right" size="small" ng-click="vm.onEntryEditClick(entry)">
+
+            <!-- entry edit button -->
+            <img zf-iconic="" icon="action" class="float-right" size="small"
+                 ng-click="vm.onEntryEditClick(entry)">
+
           </div><!-- /nested card-section -->
         </div><!-- /nested card -->
-
       </div><!-- /ng-repeat course -->
     </div><!-- /week body -->
   </div><!-- /ng-repeat -->

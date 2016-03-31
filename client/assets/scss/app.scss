@@ -147,10 +147,9 @@ body styles
   box-shadow: 0 1px 5px rgba(1, 1, 1, 0.1);
 }
 
-/*
-card styles
-*/
-
+/***********************
+ * card styles
+ ***********************/
 // card for displaying term details in list view
 .list-view-card {
   @extend .card-centered;
@@ -184,5 +183,15 @@ card styles
   margin-top: 0 !important;
   :hover {
     background-color: #eee;
+  }
+}
+
+// a card acting as a container for a form
+.form-card {
+  margin-top: 2rem !important;
+  .card-divider {
+    background-color: $primaryLight;
+    color: white;
+    font-weight: bold;
   }
 }
