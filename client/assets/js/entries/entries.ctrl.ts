@@ -64,7 +64,11 @@ module schlr.entries {
     }
 
     onAfterApiUpdate() {
-      this.buildLocalEntryList();
+      if (this.isListView()) {
+        this.buildLocalEntryList();
+      } else if (this.isDetailView() || this.isUpdateView()) {
+        this.findOne();
+      }
     }
 
     /*=============================================
@@ -155,6 +159,7 @@ module schlr.entries {
     }
 
     onEntryEditClick(entry: any): void {
+      this.entriesSvc.setNewEntryParams(entry.term[0], entry.week, entry.course.id);
       this.entry = entry;
       this.gotoUpdateView(entry.id);
     }
