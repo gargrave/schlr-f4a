@@ -54,7 +54,7 @@
 
   <div>
     <!-- submit button for 'create' view -->
-    <button class="button"
+    <button class="button success"
             ng-click="vm.submit(entryForm)"
             ng-if="vm.isCreateView()" ng-cloak
             ng-disabled="vm.working">
@@ -71,12 +71,12 @@
     </button>
 
     <!-- cancel button -->
-    <a class="hollow button" href="" ng-click="vm.cancel()">
+    <a class="button hollow" href="" ng-click="vm.cancel()">
       Cancel
     </a>
 
     <!-- delete button -->
-    <a class="alert button float-right" href="" ng-click="vm.remove()"
+    <a class="button alert float-right" href="" ng-click="vm.remove()"
        ng-if="vm.isUpdateView()" ng-cloak>
       Delete
     </a>

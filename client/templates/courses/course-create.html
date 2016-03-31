@@ -4,31 +4,28 @@ url: courses/create
 controller: CoursesCtrl as vm
 ---
 
-<div ng-init="vm.initCreateView()">
-  <!-- sub-title bar -->
-  <div class="title-bar entries-title-bar">
-    <div class="center title">Add a Course</div>
-  </div>
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">Add a Course</div>
+</div>
 
 
-  <div class="grid-block align-center">
-    <div class="grid-content medium-6">
+<div class="grid-block align-center">
+  <div class="grid-content medium-6">
 
-      <!-- terms list, no-auth -->
-      <div ng-if="!main.isLoggedIn()">
-        <p>You are not logged in.</p>
-      </div><!-- /terms list, no-auth -->
+    <!-- terms list, no-auth -->
+    <div ng-if="!main.isLoggedIn()">
+      <p>You are not logged in.</p>
+    </div><!-- /terms list, no-auth -->
 
-      <!-- term create form, auth -->
-      <div class="card" ng-if="main.isLoggedIn()">
-        <div class="card-section">
-          <div class="title-bar content-subtitle">
-            <div class="left title">New Course Details</div>
-          </div>
-          <div ng-include="'templates/forms/course-form.html'"></div>
-        </div>
-      </div><!-- /term create form, auth -->
-
-    </div>
+    <!-- term create form, auth -->
+    <div class="card form-card" ng-if="main.isLoggedIn()" ng-init="vm.initCreateView()">
+      <div class="card-divider">
+        Course Details
+      </div>
+      <div class="card-section">
+        <div ng-include="'templates/forms/course-form.html'"></div>
+      </div>
+    </div><!-- /term create form, auth -->
   </div>
 </div>

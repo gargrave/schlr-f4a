@@ -4,50 +4,46 @@ url: courses/detail/:id
 controller: CoursesCtrl as vm
 ---
 
-<div>
-  <!-- sub-title bar -->
-  <div class="title-bar entries-title-bar">
-    <div class="center title">
-      Course Details:
-      <span ng-bind="vm.entry.name"></span>
-    </div>
-    <!-- link back to courses list -->
-    <span class="left">
-      <a href="" ui-sref="home.course-list">
-        <img zf-iconic="" icon="chevron" data-direction="left" size="small"
-             class="iconic-color-secondary icon-white">
-        Courses
-      </a>
-    </span>
-    <!-- link back to edit this course -->
-    <span class="right">
-      <a href="" ui-sref="home.course-update({ id: vm.entry.id })">
-        Update
-      </a>
-    </span>
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">
+    Course Details:
+    <span ng-bind="vm.entry.name"></span>
   </div>
-  <br>
+  <!-- link back to courses list -->
+  <span class="left">
+    <a href="" ui-sref="home.course-list">
+      <img zf-iconic="" icon="chevron" data-direction="left" size="small"
+           class="iconic-color-secondary icon-white">
+      Courses
+    </a>
+  </span>
+  <!-- link back to edit this course -->
+  <span class="right">
+    <a href="" ui-sref="home.course-update({ id: vm.entry.id })">Update</a>
+  </span>
+</div>
+<br>
 
 
-  <div class="grid-block align-center">
-    <div class="grid-content medium-6">
+<div class="grid-block align-center">
+  <div class="grid-content medium-6">
 
-      <!-- terms list, no-auth -->
-      <div ng-if="!main.isLoggedIn()">
-        <p>You are not logged in.</p>
-      </div><!-- /terms list, no-auth -->
+    <!-- terms list, no-auth -->
+    <div ng-if="!main.isLoggedIn()">
+      <p>You are not logged in.</p>
+    </div><!-- /terms list, no-auth -->
 
-      <!-- term create form, auth -->
-      <div class="card" ng-if="main.isLoggedIn()" ng-init="vm.initDetailView()">
-        <div class="card-section">
-
-          <p><strong>Title: </strong><span ng-bind="vm.entry.name"></span></p>
-          <p><strong>Full name: </strong><span ng-bind="vm.entry.fullName"></span></p>
-          <p><strong>Term: </strong><span ng-bind="vm.entry.term.name"></span></p>
-
-        </div>
-      </div><!-- /term create form, auth -->
-
-    </div>
+    <!-- term create form, auth -->
+    <div class="card form-card" ng-if="main.isLoggedIn()" ng-init="vm.initDetailView()">
+      <div class="card-divider">
+        Course Details
+      </div>
+      <div class="card-section">
+        <p><strong>Title: </strong><span ng-bind="vm.entry.name"></span></p>
+        <p><strong>Full name: </strong><span ng-bind="vm.entry.fullName"></span></p>
+        <p><strong>Term: </strong><span ng-bind="vm.entry.term.name"></span></p>
+      </div>
+    </div><!-- /term create form, auth -->
   </div>
 </div>
