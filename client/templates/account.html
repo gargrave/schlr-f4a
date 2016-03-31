@@ -12,58 +12,28 @@ controller: AuthCtrl as vm
 
 <div class="grid-block align-center">
   <div class="grid-content medium-6">
-    <br>
 
     <!-- login form, for non-authenticated users -->
-    <div ng-if="!vm.isLoggedIn()" ng-cloak>
-      <div class="title-bar content-subtitle">
-        <div class="left title">Login</div>
+    <div class="card form-card" ng-if="!vm.isLoggedIn()" ng-cloak>
+      <div class="card-divider">Login</div>
+      <div class="card-section">
+        <div ng-include="'templates/forms/login-form.html'"></div>
       </div>
-      <div ng-include="'templates/forms/login-form.html'"></div>
     </div>
 
     <!-- account/settings, for authenticated users -->
-    <div ng-if="vm.isLoggedIn()" ng-cloak>
-      <div class="title-bar content-subtitle">
-        <div class="left title">Account</div>
+    <div class="card form-card" ng-if="vm.isLoggedIn()" ng-cloak>
+      <div class="card-divider">
+        Account
       </div>
+      <div class="card-section">
+        <p><strong>Email: </strong><span ng-bind="vm.userEmail()"></span></p>
+        <p><strong>Display name: </strong><span ng-bind="vm.userName()"></span></p>
+        <p><strong>Session expires: </strong>TODO: Show session exp. date</p>
+        <br>
+        <button class="button success" ng-click="vm.logout()">Logout</button>
+      </div><!-- /card section --->
+    </div><!-- /card for auth view --->
 
-      <div class="block-list block-list-content">
-        <ul>
-          <li>
-            <span>User name: <span ng-bind="vm.userName()"></span></span>
-          </li>
-          <li>
-            <span>Email: <span ng-bind="vm.userEmail()"></span></span>
-          </li>
-        </ul>
-      </div>
-
-      <button class="button success" ng-click="vm.logout()">Logout</button>
-    </div>
-
-    <!--
-    <section class="block-list block-list-content">
-      <header>Filtering</header>
-      <ul>
-        <li>
-          <span>Filter Spam</span>
-          <div class="switch"><input type="checkbox" id="setting1"><label for="setting1"></label></div>
-        </li>
-        <li>
-          <span>Delete Facebook Emails</span>
-          <div class="switch"><input type="checkbox" id="setting2"><label for="setting2"></label></div>
-        </li>
-        <li>
-          <span>Bake Pizza</span>
-          <div class="switch"><input type="checkbox" id="setting3"><label for="setting3"></label></div>
-        </li>
-        <li>
-          <span>Consider Corgis</span>
-          <div class="switch"><input type="checkbox" id="setting4"><label for="setting4"></label></div>
-        </li>
-      </ul>
-    </section>
-    -->
   </div>
 </div>
