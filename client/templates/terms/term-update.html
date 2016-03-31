@@ -4,14 +4,13 @@ url: terms/update/:id
 controller: TermsCtrl as vm
 ---
 
-<div ng-init="vm.initUpdateView()">
-  <!-- sub-title bar -->
-  <div class="title-bar entries-title-bar">
-    <div class="center title">
-      Update Term:
-      <span ng-bind="::vm.entry.name"></span>
-    </div>
-    <!-- link back to terms list -->
+<!-- sub-title bar -->
+<div class="title-bar entries-title-bar">
+  <div class="center title">
+    Update Term:
+    <span ng-bind="::vm.entry.name"></span>
+  </div>
+  <!-- link back to terms list -->
     <span class="left">
       <a href="" ui-sref="home.term-detail({ id: vm.entry.id })">
         <img zf-iconic="" icon="chevron" data-direction="left" size="small"
@@ -19,25 +18,26 @@ controller: TermsCtrl as vm
         Cancel
       </a>
     </span>
-  </div>
-  <br>
+</div>
+<br>
 
 
-  <div class="grid-block align-center">
-    <div class="grid-content medium-6">
+<div class="grid-block align-center">
+  <div class="grid-content medium-6">
 
-      <!-- terms list, no-auth -->
-      <div ng-if="!main.isLoggedIn()">
-        <p>You are not logged in.</p>
-      </div><!-- /terms list, no-auth -->
+    <!-- terms list, no-auth -->
+    <div ng-if="!main.isLoggedIn()">
+      <p>You are not logged in.</p>
+    </div><!-- /terms list, no-auth -->
 
-      <!-- term create form, auth -->
-      <div class="card" ng-if="main.isLoggedIn()">
-        <div class="card-section">
-          <div ng-include="'templates/forms/term-form.html'"></div>
-        </div>
-      </div><!-- /term create form, auth -->
-
-    </div>
+    <!-- term create form, auth -->
+    <div class="card form-card" ng-if="main.isLoggedIn()" ng-init="vm.initUpdateView()">
+      <div class="card-divider">
+        Term Details
+      </div>
+      <div class="card-section">
+        <div ng-include="'templates/forms/term-form.html'"></div>
+      </div>
+    </div><!-- /card -->
   </div>
 </div>
