@@ -4,8 +4,12 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Schlr</title>
-
+  <!-- DEV_STYLESHEETS -->
   <link rel="stylesheet" href="./assets/css/app.css" type="text/css">
+  <!-- END_DEV_STYLESHEETS -->
+  <!-- PROD_STYLESHEETS -->
+  <link rel="stylesheet" href="app.min.css" type="text/css">
+  <!-- END_PROD_STYLESHEETS -->
 </head>
 <body ng-controller="MainCtrl as main">
 <div class="grid-frame vertical">
@@ -25,16 +29,15 @@
   <div ui-view class="grid-block">
   </div>
 </div>
-
 <!-- DEV_SCRIPTS -->
-<script src="./assets/js/libs/foundation.js"></script>
-<script src="./assets/js/libs/templates.js"></script>
-<script src="./assets/js/libs/routes.js"></script>
+<script src="./assets/libs/foundation.js"></script>
+<script src="./assets/libs/templates.js"></script>
+<script src="./assets/libs/routes.js"></script>
 
-<script src="./assets/js/libs/lodash.min.js"></script>
-<script src="./assets/js/libs/angular-cookies.min.js"></script>
-<script src="./assets/js/libs/angular-cache.min.js"></script>
-<script src="./assets/js/libs/angular-messages.min.js"></script>
+<script src="./assets/libs/lodash.min.js"></script>
+<script src="./assets/libs/angular-cookies.min.js"></script>
+<script src="./assets/libs/angular-cache.min.js"></script>
+<script src="./assets/libs/angular-messages.min.js"></script>
 
 <script src="./assets/js/app.js"></script>
 
@@ -61,17 +64,15 @@
 
 <script src="./assets/js/entries/entries.ctrl.js"></script>
 <script src="./assets/js/entries/entries.svc.js"></script>
-<script src="./assets/js/entries/WeekContainer.js"></script>
+<script src="./assets/js/entries/WeekContainer.class.js"></script>
 
 <script src="./assets/js/courses/courses.ctrl.js"></script>
 <script src="./assets/js/courses/courses.svc.js"></script>
 <!-- END_DEV_SCRIPTS -->
-
 <!-- PROD_SCRIPTS -->
-<script src="./assets/js/libs/foundation.js"></script>
-<script src="./assets/js/libs/templates.js"></script>
-<script src="./assets/js/libs/routes.js"></script>
+<script src="f4a.min.js"></script>
+<script src="libs.min.js"></script>
+<script src="app.min.js"></script>
 <!-- END_PROD_SCRIPTS -->
-
 </body>
 </html>

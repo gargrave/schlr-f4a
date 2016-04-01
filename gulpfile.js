@@ -21,6 +21,15 @@ var isProduction = !!(argv.production);
 // - - - - - - - - - - - - - - -
 
 var paths = {
+  build: {
+    jsApp: [
+      './build/assets/js/**/*.js',
+      '!./build/assets/libs/*.js'
+    ]
+  },
+  dist: {
+    root: './dist/'
+  },
   assets: [
     './client/**/*.*',
     '!./client/templates/**/*.*',
@@ -85,7 +94,7 @@ gulp.task('copy', function() {
 gulp.task('copy:templates', ['replace-build'], function() {
   return gulp.src('./client/templates/**/*.html')
     .pipe(router({
-      path: 'build/assets/js/libs/routes.js',
+      path: 'build/assets/libs/routes.js',
       root: 'client'
     }))
     .pipe(gulp.dest('./build/templates'));
@@ -101,7 +110,7 @@ gulp.task('copy:foundation', function(cb) {
     }))
     .pipe($.uglify())
     .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('./build/assets/js/libs/'));
+    .pipe(gulp.dest('./build/assets/libs/'));
 
   // Iconic SVG icons
   gulp.src('./bower_components/foundation-apps/iconic/**/*')
@@ -113,7 +122,7 @@ gulp.task('copy:foundation', function(cb) {
 // copy required libs into 'build' folder
 gulp.task('copy:libs', function() {
   return gulp.src(paths.libsJS)
-    .pipe(gulp.dest('./build/assets/js/libs/'));
+    .pipe(gulp.dest('./build/assets/libs/'));
 });
 
 /*=============================================
@@ -154,7 +163,7 @@ gulp.task('ts', function() {
  = uglify
  =============================================*/
 // Compiles and copies the Foundation for Apps JavaScript, as well as your app's custom JS
-gulp.task('uglify', ['uglify:foundation', 'uglify:app']);
+// gulp.task('uglify', ['uglify:foundation', 'uglify:app']);
 
 gulp.task('uglify:foundation', function(cb) {
   var uglify = $.if(isProduction, $.uglify()
@@ -165,20 +174,29 @@ gulp.task('uglify:foundation', function(cb) {
   return gulp.src(paths.foundationJS)
     .pipe(uglify)
     .pipe($.concat('foundation.js'))
-    .pipe(gulp.dest('./build/assets/js/libs/'));
+    .pipe(gulp.dest('./build/assets/libs/'));
 });
 
-gulp.task('uglify:app', function() {
-  // var uglify = $.if(isProduction, $.uglify()
-  //   .on('error', function(e) {
-  //     console.log(e);
-  //   }));
-  //
-  // return gulp.src(paths.appJS)
-  //   .pipe(uglify)
-  //   .pipe($.concat('app.js'))
-  //   .pipe(gulp.dest('./build/assets/js/'));
-});
+// gulp.task('uglify:app', function() {
+//   var uglify = $.if(isProduction, $.uglify()
+//     .on('error', function(e) {
+//       console.log(e);
+//     }));
+//
+//   var asdf = [
+//     'build/assets/js/app.js',
+//     'build/assets/js/**/*.module.js',
+//     'build/assets/js/**/*.ctrl.js',
+//     'build/assets/js/**/*.svc.js',
+//     'build/assets/js/**/*.filters.js',
+//     'build/assets/js/entries/WeekContainer.js'
+//   ];
+//
+//   return gulp.src(asdf)
+//     .pipe(uglify)
+//     .pipe($.concat('app.min.js'))
+//     .pipe(gulp.dest(paths.dist.root));
+// });
 
 /*=============================================
  = replace
@@ -186,13 +204,8 @@ gulp.task('uglify:app', function() {
 gulp.task('replace-build', function() {
   gulp.src(['client/index.html'])
     .pipe(replace(/<!-- PROD_SCRIPTS -->[\s\S]+<!-- END_PROD_SCRIPTS -->/g, ''))
+    .pipe(replace(/<!-- PROD_STYLESHEETS -->[\s\S]+<!-- END_PROD_STYLESHEETS -->/g, ''))
     .pipe(gulp.dest('build/'));
-});
-
-gulp.task('replace-dist', function() {
-  gulp.src(['client/index.html'])
-    .pipe(replace(/<!-- DEV_SCRIPTS -->[\s\S]+<!-- END_DEV_SCRIPTS -->/g, ''))
-    .pipe(gulp.dest('dist/'));
 });
 
 /*==============================================
@@ -222,10 +235,6 @@ gulp.task('build', function(cb) {
       'replace-build', 'uglify:foundation'
     ],
     'copy:templates', 'ts', 'sass', cb);
-});
-
-gulp.task('dist', function(cb) {
-  sequence(['replace-dist']);
 });
 
 /*=============================================

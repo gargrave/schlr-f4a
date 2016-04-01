@@ -3,34 +3,39 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Foundation for Apps</title>
+  <title>Schlr</title>
 
-  <link rel="stylesheet" href="./assets/css/app.css" type="text/css">
-  <link rel="stylesheet" href="./assets/css/schlr.css" type="text/css">
+  
 
+  <!-- PROD_STYLESHEETS -->
+  <link rel="stylesheet" href="app.min.css" type="text/css">
+  <!-- END_PROD_STYLESHEETS -->
 </head>
-<body>
+<body ng-controller="MainCtrl as main">
 <div class="grid-frame vertical">
-
   <div class="grid-content shrink" style="padding: 0;">
     <ul class="primary condense menu-bar">
-      <li><a><strong>Foundation for Apps</strong></a></li>
+      <li>
+        <a>
+          <strong>
+            SCHLR
+            <span ng-bind="'(dev)'" ng-if="main.isDev()" ng-cloak></span>
+          </strong>
+        </a>
+      </li>
     </ul>
   </div>
 
-  <div ui-view class="grid-content">
+  <div ui-view class="grid-block">
   </div>
-
 </div>
 
 
 
 <!-- PROD_SCRIPTS -->
-<script src="./assets/js/libs/foundation.js"></script>
-<script src="./assets/js/libs/templates.js"></script>
-<script src="./assets/js/libs/routes.js"></script>
-
-<script src="./assets/js/app.js"></script>
+<script src="f4a.min.js"></script>
+<script src="libs.min.js"></script>
+<script src="app.min.js"></script>
 <!-- END_PROD_SCRIPTS -->
 
 </body>

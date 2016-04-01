@@ -1,7 +1,7 @@
 {
   "appId": "schlr",
   "apiKey": "2cc1217a9ff18319ea9aea2b93f0cf84498918ccf7c9bd070ff76604e313fb7c",
-  "public": "./build",
+  "public": "./dist",
   "ignore": [
     "stamplay.json",
     "**/.*",
