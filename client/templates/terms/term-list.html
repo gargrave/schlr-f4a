@@ -7,10 +7,12 @@ controller: TermsCtrl as vm
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
   <div class="center title"><span zf-open="navModal">Terms</span></div>
+
+  <!-- terms modal button -->
   <span class="right">
-    <a href="" ui-sref="home.term-create">
-      <strong>Add</strong>
-    </a>
+    <img class="iconic-color-secondary"
+         zf-iconic="" icon="action" size="small"
+         zf-open="entryActionsModal">
   </span>
 </div><!-- /sub-title bar -->
 
@@ -32,5 +34,5 @@ controller: TermsCtrl as vm
       </div>
     </div>
   </div><!-- /terms list, auth -->
-
 </div>
+<div ng-include="'templates/modals/term-list-actions.html'"></div>

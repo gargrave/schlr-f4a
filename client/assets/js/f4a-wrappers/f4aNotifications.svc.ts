@@ -26,6 +26,15 @@ module app.wrappers {
       });
     }
 
+    showInfo(config: any): void {
+      this.showNotification({
+        title: config.title || '',
+        content: config.content || '',
+        color: 'info',
+        autoclose: config.autoclose || '3000'
+      });
+    }
+
     showAlert(config: any): void {
       this.showNotification({
         title: config.title || '',

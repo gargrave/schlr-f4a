@@ -71,6 +71,7 @@ module app.common {
           this.afterSaveSuccess(entry);
           deferred.resolve(entry);
         }, (err) => {
+          this.afterSaveError(err);
           deferred.reject(err);
         })
         .finally(() => {
@@ -88,6 +89,7 @@ module app.common {
           this.afterSaveSuccess(entry);
           deferred.resolve(entry);
         }, (err) => {
+          this.afterSaveError(err);
           deferred.reject(err);
         })
         .finally(() => {
@@ -124,6 +126,9 @@ module app.common {
               this.deferredQuery = null;
               this.needsUpdate = false;
               this.pendingQuery = false;
+            }, (err) => {
+              this.afterQueryError(err);
+              this.deferredQuery.reject(err);
             })
             .finally(() => {
             });
@@ -170,8 +175,10 @@ module app.common {
         // send request
         this.$http.get(url, this.auth.getRequestHeaders())
           .then((res) => {
+            this.afterGetSuccess(res);
             deferred.resolve(res.data);
           }, (err) => {
+            this.afterGetError(err);
             deferred.reject(`No entry could be found with matching ID: ${id}`);
           })
           .finally(() => {
@@ -216,6 +223,7 @@ module app.common {
               });
           }
         }, (err) => {
+          this.afterUpdateError(id, err);
           deferred.reject(err);
         })
         .finally(() => {
@@ -243,6 +251,7 @@ module app.common {
           this.afterRemoveSuccess(id, deleteRes);
           deferred.resolve(deleteRes.data);
         }, (err) => {
+          this.afterRemoveError(id, err);
           deferred.reject(err);
         })
         .finally(() => {
@@ -260,6 +269,9 @@ module app.common {
     afterQuerySuccess(res: any): void {
     }
 
+    afterGetSuccess(res: any): void {
+    }
+
     /**
      * Callback after a successfull save() request. Anything a child class needs
      * to do before resolving the promise can be done here.
@@ -268,7 +280,7 @@ module app.common {
      */
     afterSaveSuccess(res: any): void {
       this.entries.push(res);
-      this.nots.showSuccess({
+      this.nots.showInfo({
         title: 'Success!',
         content: `New ${this.moduleName} successfully saved.`
       });
@@ -282,7 +294,7 @@ module app.common {
      * @param res The updated entry object
      */
     afterUpdateSuccess(id: string, res: any): void {
-      this.nots.showSuccess({
+      this.nots.showInfo({
         title: 'Success!',
         content: `The ${this.moduleName} was successfully updated.`
       });
@@ -300,9 +312,64 @@ module app.common {
       this.entries = _.reject(this.entries, (e: any) => {
         return e.id === id;
       });
-      this.nots.showSuccess({
+      this.nots.showInfo({
         title: 'Success!',
         content: `The ${this.moduleName} was successfully deleted.`
+      });
+    }
+
+    afterQueryError(res: any): void {
+      this.nots.showAlert({
+        title: 'Error!',
+        content: `Something went wrong trying to query the server.`
+      });
+    }
+
+    afterGetError(res: any): void {
+      this.nots.showAlert({
+        title: 'Error!',
+        content: `Something went wrong trying to find the entry.`
+      });
+    }
+
+    /**
+     * Callback after a successfull save() request. Anything a child class needs
+     * to do before resolving the promise can be done here.
+     *
+     * @param res The newly created entry object
+     */
+    afterSaveError(res: any): void {
+      this.nots.showAlert({
+        title: 'Error!',
+        content: `Something went wrong trying to save the entry.`
+      });
+    }
+
+    /**
+     * Callback after a successfull update() request. Anything a child class needs
+     * to do before resolving the promise can be done here.
+     *
+     * @param id The id of the affected entry
+     * @param res The updated entry object
+     */
+    afterUpdateError(id: string, res: any): void {
+      this.nots.showAlert({
+        title: 'Error!',
+        content: `Something went wrong trying to update the entry.`
+      });
+    }
+
+    /**
+     * Callback after a successfull remove() request. Anything a child class needs
+     * to do before resolving the promise can be done here.
+     *
+     * @param id The id of the affected entry
+     * @param res The removed entry object
+     */
+    afterRemoveError(id: string, res: any): void {
+      this.nots.showAlert({
+        title: 'Error!',
+        content: `Something went wrong trying to delete the entry.`
       });
     }
 

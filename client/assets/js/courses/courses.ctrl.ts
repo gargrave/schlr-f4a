@@ -54,6 +54,22 @@ module schlr.courses {
       super($scope, $state, $stateParams, auth, dataSvc, mainSvc, apiUpdater, 'course');
     }
 
+    create(form?): void {
+      if (this.auth.isLoggedIn()) {
+        if (form) {
+          form.$submitted = true;
+        }
+        if (!form || (form && form.$valid)) {
+          this.working = true;
+          this.dataSvc.save2(this.entry)
+            .then((res) => {
+              this.afterCreate(res);
+              this.working = false;
+            });
+        }
+      }
+    }
+
     hasTerms(): any {
       return this.termsSvc.entryCount() > 0;
     }

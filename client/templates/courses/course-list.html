@@ -7,10 +7,12 @@ controller: CoursesCtrl as vm
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
   <div class="center title"><span zf-open="navModal">Courses</span></div>
+
+  <!-- courses modal button -->
   <span class="right">
-    <a href="" ui-sref="home.course-create">
-      <strong>Add</strong>
-    </a>
+    <img class="iconic-color-secondary"
+         zf-iconic="" icon="action" size="small"
+         zf-open="entryActionsModal">
   </span>
 </div>
 
@@ -44,3 +46,4 @@ controller: CoursesCtrl as vm
     </div><!-- /terms repeat -->
   </div>
 </div>
+<div ng-include="'templates/modals/course-list-actions.html'"></div>

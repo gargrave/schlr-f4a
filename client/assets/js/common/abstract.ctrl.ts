@@ -106,7 +106,7 @@ module app.common {
             });
         }
       }
-    };
+    }
 
     find(forceRefresh: boolean = false): void {
       if (this.auth.isLoggedIn()) {
