@@ -19,6 +19,7 @@ module app.common {
                 protected $q: ng.IQService,
                 protected auth: auth.AuthSvc,
                 protected urls: app.common.UrlsSvc,
+                protected nots: app.wrappers.F4ANotificationSvc,
                 protected moduleName: string) {
       this.crudApiUrl = urls.apiCrudBaseUrl + '/' + moduleName;
       this.needsUpdate = true;
@@ -205,10 +206,12 @@ module app.common {
                 foundEntry[i] = data[i];
               }
             }
+            this.afterUpdateSuccess(id, putRes);
             deferred.resolve(putRes.data);
           } else {
             this.query(true)
               .then((queryRes) => {
+                this.afterUpdateSuccess(id, putRes);
                 deferred.resolve(putRes.data);
               });
           }
@@ -237,10 +240,7 @@ module app.common {
       // send request
       this.$http.delete(url, this.auth.getRequestHeaders())
         .then((deleteRes) => {
-          // update the local list by removing the deleted entry
-          this.entries = _.reject(this.entries, (e: any) => {
-            return e.id === id;
-          });
+          this.afterRemoveSuccess(id, deleteRes);
           deferred.resolve(deleteRes.data);
         }, (err) => {
           deferred.reject(err);
@@ -264,10 +264,46 @@ module app.common {
      * Callback after a successfull save() request. Anything a child class needs
      * to do before resolving the promise can be done here.
      *
-     * @param entry The newly created entry object
+     * @param res The newly created entry object
      */
-    afterSaveSuccess(entry: any): void {
-      this.entries.push(entry);
+    afterSaveSuccess(res: any): void {
+      this.entries.push(res);
+      this.nots.showSuccess({
+        title: 'Success!',
+        content: `New ${this.moduleName} successfully saved.`
+      });
+    }
+
+    /**
+     * Callback after a successfull update() request. Anything a child class needs
+     * to do before resolving the promise can be done here.
+     *
+     * @param id The id of the affected entry
+     * @param res The updated entry object
+     */
+    afterUpdateSuccess(id: string, res: any): void {
+      this.nots.showSuccess({
+        title: 'Success!',
+        content: `The ${this.moduleName} was successfully updated.`
+      });
+    }
+
+    /**
+     * Callback after a successfull remove() request. Anything a child class needs
+     * to do before resolving the promise can be done here.
+     *
+     * @param id The id of the affected entry
+     * @param res The removed entry object
+     */
+    afterRemoveSuccess(id: string, res: any): void {
+      // update the local list by removing the deleted entry
+      this.entries = _.reject(this.entries, (e: any) => {
+        return e.id === id;
+      });
+      this.nots.showSuccess({
+        title: 'Success!',
+        content: `The ${this.moduleName} was successfully deleted.`
+      });
     }
 
     /*=============================================

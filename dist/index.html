@@ -4,39 +4,24 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Schlr</title>
-
   
-
   <!-- PROD_STYLESHEETS -->
   <link rel="stylesheet" href="app.min.css" type="text/css">
   <!-- END_PROD_STYLESHEETS -->
 </head>
 <body ng-controller="MainCtrl as main">
 <div class="grid-frame vertical">
-  <div class="grid-content shrink" style="padding: 0;">
-    <ul class="primary condense menu-bar">
-      <li>
-        <a>
-          <strong>
-            SCHLR
-            <span ng-bind="'(dev)'" ng-if="main.isDev()" ng-cloak></span>
-          </strong>
-        </a>
-      </li>
-    </ul>
-  </div>
+
 
   <div ui-view class="grid-block">
   </div>
 </div>
-
-
 
 <!-- PROD_SCRIPTS -->
 <script src="f4a.min.js"></script>
 <script src="libs.min.js"></script>
 <script src="app.min.js"></script>
 <!-- END_PROD_SCRIPTS -->
-
 </body>
+<div ng-include="'templates/modals/nav-modal.html'"></div>
 </html>

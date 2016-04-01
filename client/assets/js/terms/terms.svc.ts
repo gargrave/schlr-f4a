@@ -4,7 +4,7 @@ module schlr.terms {
   export class TermsSvc extends app.common.AbstractSvc {
 
     static $inject = ['$http', '$q',
-      'AuthSvc', 'UrlsSvc', 'ApiUpdaterSvc'
+      'AuthSvc', 'UrlsSvc', 'F4ANotificationSvc', 'ApiUpdaterSvc'
     ];
 
     activeTerm: ITerm;
@@ -13,8 +13,9 @@ module schlr.terms {
                 $q: ng.IQService,
                 auth: auth.AuthSvc,
                 urls: app.common.UrlsSvc,
+                nots: app.wrappers.F4ANotificationSvc,
                 private apiUpdater: app.common.ApiUpdaterSvc) {
-      super($http, $q, auth, urls, 'term');
+      super($http, $q, auth, urls, nots, 'term');
       this.selectProps = ['name', 'startDate', 'endDate'];
     }
 

@@ -4,7 +4,7 @@ module schlr.courses {
   export class CoursesSvc extends app.common.AbstractSvc {
 
     static $inject = ['$http', '$q',
-      'AuthSvc', 'UrlsSvc', 'TermsSvc', 'EntriesSvc'
+      'AuthSvc', 'UrlsSvc', 'F4ANotificationSvc', 'TermsSvc', 'EntriesSvc'
     ];
 
     private activeCourses: ICourse[];
@@ -13,9 +13,10 @@ module schlr.courses {
                 $q: ng.IQService,
                 auth: auth.AuthSvc,
                 urls: app.common.UrlsSvc,
+                nots: app.wrappers.F4ANotificationSvc,
                 private termsSvc: schlr.terms.TermsSvc,
                 private entriesSvc: schlr.entries.EntriesSvc) {
-      super($http, $q, auth, urls, 'course');
+      super($http, $q, auth, urls, nots, 'course');
       this.selectProps = ['name', 'fullName', 'term'];
     }
 

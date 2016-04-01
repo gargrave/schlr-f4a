@@ -3,6 +3,7 @@ module schlr {
   angular.module('schlr', [
       'auth',
       'common',
+      'f4a-wrappers',
       'ngMessages',
       'ui.router',
       'ngAnimate',

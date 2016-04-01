@@ -4,7 +4,7 @@ module schlr.entries {
   export class EntriesSvc extends app.common.AbstractSvc {
 
     static $inject = ['$http', '$q',
-      'AuthSvc', 'UrlsSvc', 'TermsSvc'
+      'AuthSvc', 'UrlsSvc', 'F4ANotificationSvc', 'TermsSvc'
     ];
 
     private newEntryCourseId: string;
@@ -15,8 +15,9 @@ module schlr.entries {
                 $q: ng.IQService,
                 auth: auth.AuthSvc,
                 urls: app.common.UrlsSvc,
+                nots: app.wrappers.F4ANotificationSvc,
                 private termsSvc: schlr.terms.TermsSvc) {
-      super($http, $q, auth, urls, 'entry');
+      super($http, $q, auth, urls, nots, 'entry');
       this.selectProps = ['name', 'finished', 'week', 'course', 'term'];
     }
 
