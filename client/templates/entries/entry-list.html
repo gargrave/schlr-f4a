@@ -6,13 +6,16 @@ controller: EntriesCtrl as vm
 
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
-  <div class="center title" zf-open="termSelectModal">
-    <a href="" ng-bind="vm.activeTerm.name" ng-if="!vm.working && vm.activeTerm" ng-cloak></a>
-    <a href="" ng-if="!vm.working && !vm.activeTerm" ng-cloak>Select Term</a>
+  <div class="center title" zf-open="navModal">
+    <span>Entries</span>
+    <a href="" ng-if="!vm.working && vm.activeTerm" ng-cloak>
+      (<span ng-bind="vm.activeTerm.name"></span>)
+    </a>
   </div>
+
   <span class="right">
     <img class="iconic-color-secondary"
-         zf-iconic="" icon="cog" size="small"
+         zf-iconic="" icon="action" size="small"
          zf-open="entryActionsModal">
   </span>
 </div><!-- /sub-title bar -->
@@ -102,22 +105,4 @@ controller: EntriesCtrl as vm
   </div><!-- /grid-block -->
 </div><!-- /modal -->
 
-
-<!-- entry actions modal -->
-<div zf-modal="" id="entryActionsModal" class="collapse">
-  <div class="grid-block vertical">
-
-    <div class="primary title-bar">
-      <div class="center title">Select an Action</div>
-    </div>
-
-    <div class="grid-content padding" style="padding-top: 1rem;">
-      <section class="block-list">
-        <ul>
-          <li><a href="" zf-close="" ng-click="vm.addWeek()">Add a Week</a></li>
-        </ul>
-      </section>
-      <a zf-close="" class="button">Cancel</a>
-    </div><!-- /grid-content -->
-  </div><!-- /grid-block -->
-</div><!-- /modal -->
+<div ng-include="'templates/modals/entry-list-actions.html'"></div>
