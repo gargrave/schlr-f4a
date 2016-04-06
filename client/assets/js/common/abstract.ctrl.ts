@@ -18,6 +18,7 @@ module app.common {
                 protected mainSvc: app.common.IMainSvc,
                 protected apiUpdater: app.common.ApiUpdaterSvc,
                 protected moduleName: string) {
+      this.filterText = '';
       this.working = true;
       this.showSearch = false;
 
