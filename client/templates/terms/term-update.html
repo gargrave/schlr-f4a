@@ -6,29 +6,31 @@ controller: TermsCtrl as vm
 
 <!-- sub-title bar -->
 <div class="title-bar entries-title-bar">
-  <div class="center title">
+
+  <!-- title for not logged in -->
+  <div class="center title" ng-if="!main.isLoggedIn()" ng-cloak>
+    Not Authorized
+  </div>
+  <!-- title for logged in -->
+  <div class="center title" zf-open="navModal" ng-if="main.isLoggedIn()" ng-cloak>
     Update Term:
     <span ng-bind="::vm.entry.name"></span>
   </div>
-  <!-- link back to terms list -->
-    <span class="left">
-      <a href="" ui-sref="home.term-detail({ id: vm.entry.id })">
-        <img zf-iconic="" icon="chevron" data-direction="left" size="small"
-             class="iconic-color-secondary icon-white">
-        Cancel
-      </a>
-    </span>
-</div>
-<br>
 
+  <!-- link back to terms list -->
+  <span class="left" ng-if="main.isLoggedIn()" ng-cloak>
+    <a href="" ui-sref="home.term-detail({ id: vm.entry.id })">
+      <img zf-iconic="" icon="chevron" data-direction="left" size="small"
+           class="iconic-color-secondary icon-white">
+      Cancel
+    </a>
+  </span>
+</div><!-- /sub-title bar -->
+
+<div not-logged-in></div>
 
 <div class="grid-block align-center">
   <div class="grid-content medium-6">
-
-    <!-- terms list, no-auth -->
-    <div ng-if="!main.isLoggedIn()">
-      <p>You are not logged in.</p>
-    </div><!-- /terms list, no-auth -->
 
     <!-- term create form, auth -->
     <div class="card form-card" ng-if="main.isLoggedIn()" ng-init="vm.initUpdateView()">
@@ -39,5 +41,6 @@ controller: TermsCtrl as vm
         <div ng-include="'templates/forms/term-form.html'"></div>
       </div>
     </div><!-- /card -->
+
   </div>
 </div>

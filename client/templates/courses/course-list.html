@@ -4,21 +4,29 @@ url: courses
 controller: CoursesCtrl as vm
 ---
 
-<!-- sub-title bar -->
-<div class="title-bar entries-title-bar">
-  <div class="center title"><span zf-open="navModal">Courses</span></div>
+<!-- sub-title bar, no auth -->
+<div class="title-bar entries-title-bar" ng-if="!main.isLoggedIn()" ng-cloak>
+  <div class="center title">
+    Not Authorized
+  </div>
+</div><!-- /sub-title bar, no auth -->
 
-  <!-- courses modal button -->
+<!-- sub-title bar, auth -->
+<div class="title-bar entries-title-bar" ng-if="main.isLoggedIn()" ng-cloak>
+  <div class="center title" zf-open="navModal">
+    Courses
+  </div>
+  <!-- 'courses modal' open button -->
   <span class="right">
     <img class="iconic-color-secondary"
          zf-iconic="" icon="action" size="small"
          zf-open="entryActionsModal">
   </span>
-</div>
+</div><!-- /sub-title bar, auth -->
 
-<div ng-if="!main.isLoggedIn()">
-  You are not logged in.
-</div>
+
+<div not-logged-in></div>
+
 
 <!-- courses list -->
 <div ng-if="main.isLoggedIn()" ng-init="vm.initListView()">

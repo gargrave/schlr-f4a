@@ -4,29 +4,29 @@ url: entries
 controller: EntriesCtrl as vm
 ---
 
-<!-- sub-title bar -->
-<div class="title-bar entries-title-bar">
-
-  <!-- title for not logged in -->
-  <div class="center title" ng-if="!main.isLoggedIn()" ng-cloak>
+<!-- sub-title bar, no auth -->
+<div class="title-bar entries-title-bar" ng-if="!main.isLoggedIn()" ng-cloak>
+  <div class="center title">
     Not Authorized
   </div>
-  <!-- title for logged in -->
-  <div class="center title" zf-open="navModal" ng-if="main.isLoggedIn()" ng-cloak>
+</div><!-- /sub-title bar, no auth -->
+
+<!-- sub-title bar, auth -->
+<div class="title-bar entries-title-bar" ng-if="main.isLoggedIn()" ng-cloak>
+  <div class="center title" zf-open="navModal">
     Entries
     <!-- show current term name when logged in -->
     <a href="" ng-if="!vm.working && vm.activeTerm" ng-cloak>
       (<span ng-bind="vm.activeTerm.name"></span>)
     </a>
   </div>
-
   <!-- 'actions modal' open button -->
   <span class="right">
     <img class="iconic-color-secondary"
          zf-iconic="" icon="action" size="small"
          zf-open="entryActionsModal">
   </span>
-</div><!-- /sub-title bar -->
+</div><!-- /sub-title bar, auth -->
 
 
 <div not-logged-in></div>
