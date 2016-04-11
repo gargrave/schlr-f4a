@@ -110,14 +110,19 @@ body styles
   box-shadow: 0 1px 1px rgba(1, 1, 1, 0.2);
 }
 
-
-
 .content-subtitle {
   @extend .card-basic;
   border-radius: 0;
   margin: 10px 0;
   background-color: $primaryLight;
   color: white;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+
+  @include breakpoint(small down) {
+    margin-bottom: 0;
+    border: 0;
+  }
 }
 
 .content-subtitle-first {
@@ -139,8 +144,6 @@ body styles
   color: $text-muted;
   text-decoration: line-through;
 }
-
-
 
 #left-menu {
   border-right: $border;
@@ -166,7 +169,15 @@ body styles
   font-weight: bold;
   border-color: darken($primaryMed, 3%) !important;
   margin-bottom: 0 !important;
-  margin-top: 18px !important;
+
+  // collapse vertical space between courses for small screens
+  @include breakpoint(small down) {
+    margin-top: .4rem !important;
+  }
+  @include breakpoint(medium) {
+    margin-top: .9rem !important;
+  }
+
   a {
     color: white;
   }
