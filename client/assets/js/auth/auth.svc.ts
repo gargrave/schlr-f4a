@@ -194,6 +194,8 @@ module auth {
     private tokenIsValid(tokenJSON: any): boolean {
       let start = tokenJSON.iat; // issued-at date for token, in UAT seconds
       let end = tokenJSON.exp; // expiration date for token, in UAT seconds
+      console.log('Expiration:');
+      console.log(new Date(end * 1000));
       let now = Math.floor(Date.now() / 1000); // now, in UAT seconds
       return start < now < end; // has the existing token expired?
     }

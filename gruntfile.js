@@ -135,6 +135,27 @@ module.exports = function(grunt) {
           ],
           dest: '<%= paths.dist.img %>'
         }]
+      },
+      icons: {
+        files: [{
+          expand: true,
+          flatten: false,
+          cwd: 'client/icons/',
+          src: [
+            '**/*.png'
+          ],
+          dest: 'dist/icons/'
+        }]
+      },
+      mani: {
+        files: [{
+          expand: true,
+          flatten: false,
+          src: [
+            'manifest.*'
+          ],
+          dest: 'dist/'
+        }]
       }
     },
 
