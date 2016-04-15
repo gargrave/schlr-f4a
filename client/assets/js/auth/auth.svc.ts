@@ -11,6 +11,8 @@ module auth {
 
     // the data for hte currently logged-in user (if any)
     user: UserData;
+    // the date of expiration for the current session
+    sessionExp: Date;
 
     constructor(private $http: ng.IHttpService,
                 private $q: ng.IQService,
@@ -51,6 +53,7 @@ module auth {
             resUserData.email,
             resUserData.displayName);
           this.setLocalUserData(res.headers('x-stamplay-jwt'));
+          this.readStoredTokenData();
           deferred.resolve(res);
         }, (err) => {
           deferred.reject(err);
@@ -194,8 +197,7 @@ module auth {
     private tokenIsValid(tokenJSON: any): boolean {
       let start = tokenJSON.iat; // issued-at date for token, in UAT seconds
       let end = tokenJSON.exp; // expiration date for token, in UAT seconds
-      console.log('Expiration:');
-      console.log(new Date(end * 1000));
+      this.sessionExp = new Date(end * 1000);
       let now = Math.floor(Date.now() / 1000); // now, in UAT seconds
       return start < now < end; // has the existing token expired?
     }

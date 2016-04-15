@@ -2,19 +2,27 @@
 <html lang="en" ng-app="schlr">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="manifest" href="manifest.json">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Schlr">
   <meta name="apple-mobile-web-app-title" content="Schlr">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="application-name" content="Schlr">
   <meta name="theme-color" content="#0b7237">
   <meta name="msapplication-navbutton-color" content="#0b7237">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="msapplication-starturl" content="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel=icon href=/icons/icon16x16.png>
-  <link rel="apple-touch-icon" href="/icons/icon128x128.png">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon16x16.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="16x16" href="icons/icon16x16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="icons/icon48x48.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="icons/icon48x48.png">
+  <link rel="icon" type="image/png" sizes="60x60" href="icons/icon60x60.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="icons/icon60x60.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/icon128x128.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="128x128" href="icons/icon128x128.png">
+
   <title>Schlr</title>
   <!-- DEV_STYLESHEETS -->
   <link rel="stylesheet" href="./assets/css/app.css" type="text/css">
@@ -25,8 +33,6 @@
 </head>
 <body ng-controller="MainCtrl as main">
 <div class="grid-frame vertical">
-
-
   <div ui-view class="grid-block">
   </div>
 </div>

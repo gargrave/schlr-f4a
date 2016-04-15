@@ -29,7 +29,10 @@ controller: AuthCtrl as vm
       <div class="card-section">
         <p><strong>Email: </strong><span ng-bind="vm.userEmail()"></span></p>
         <p><strong>Display name: </strong><span ng-bind="vm.userName()"></span></p>
-        <p><strong>Session expires: </strong>TODO: Show session exp. date</p>
+        <p>
+          <strong>Session expires: </strong>
+          <span ng-bind="vm.expirationString() | date:'MMM d, y @ h:mm a'"></span>
+        </p>
         <br>
         <button class="button success" ng-click="vm.logout()">Logout</button>
       </div><!-- /card section --->

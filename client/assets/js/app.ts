@@ -15,7 +15,8 @@ module schlr {
     ])
 
     .constant('URLS', {
-      'DEV': 'https://schlr-dev.stamplayapp.com',
+      // 'DEV': 'https://schlr-dev.stamplayapp.com',
+      'DEV': 'https://schlr.stamplayapp.com',
       'PROD': 'https://schlr.stamplayapp.com'
     })
 

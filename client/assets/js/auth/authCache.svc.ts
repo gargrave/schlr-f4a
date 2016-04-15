@@ -3,7 +3,7 @@ module auth {
 
   import UserData = auth.UserData;
 
-  const ONE_WEEK: number = 60 * 60 * 24 * 7 * 1000;
+  const TWO_WEEKS: number = 2 * 60 * 60 * 24 * 7 * 1000;
 
   export class AuthCacheSvc {
 
@@ -25,7 +25,7 @@ module auth {
       if (!this.CacheFactory.get('token')) {
         this.tokenCache = this.CacheFactory('token', {
           storageMode: 'localStorage',
-          maxAge: ONE_WEEK,
+          maxAge: TWO_WEEKS,
           deleteOnExpire: 'aggressive'
         });
       }
@@ -57,7 +57,7 @@ module auth {
       if (!this.CacheFactory.get('user')) {
         this.userCache = this.CacheFactory('user', {
           storageMode: 'localStorage',
-          maxAge: ONE_WEEK,
+          maxAge: TWO_WEEKS,
           deleteOnExpire: 'aggressive'
         });
       }

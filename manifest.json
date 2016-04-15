@@ -2,7 +2,29 @@
   "name": "Schlr",
   "short_name": "Schlr",
   "lang": "en-US",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
-  "theme_color": "#0b7237"
+  "theme_color": "#0b7237",
+  "icons": [
+    {
+      "src": "icons/icon16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon60x60.png",
+      "sizes": "60x60",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
 }

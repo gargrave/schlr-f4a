@@ -11,6 +11,8 @@ module auth {
     password: string;
     // any error messages that we need to show
     error: string = '';
+    // a clean string for expiration of the current session
+    expiration: string = '';
 
     constructor(private $scope,
                 private auth: auth.AuthSvc) {
@@ -59,6 +61,13 @@ module auth {
     userEmail(): string {
       return this.auth.user.email;
     };
+
+    /**
+     * @returns {string} The expiration date of the current session
+     */
+    expirationString(): Date {
+      return this.auth.sessionExp || new Date;
+    }
 
     /**
      * @returns {boolean} Whether the current user is authenticated
