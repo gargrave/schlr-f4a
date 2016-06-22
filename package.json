@@ -1,10 +1,17 @@
 {
-  "name": "foundation-apps-template",
-  "version": "1.2.0",
+  "name": "schlr",
+  "version": "0.1.0",
+  "description": "A simple week-by-week style school tracking app.",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production"
   },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Gabe Hargrave",
+  "license": "MIT",
   "devDependencies": {
     "front-router": "^1.0.0",
     "grunt": "^0.4.5",

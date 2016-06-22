@@ -1,52 +1,33 @@
-# Foundation for Apps Template
+# Schlr
 
-[![devDependency Status](https://david-dm.org/zurb/foundation-apps-template/dev-status.svg)](https://david-dm.org/zurb/foundation-apps-template#info=devDependencies)
+This is just a little "custom todo" app I put together to achieve two small goals:
 
-This is the default template project for Foundation for Apps, powered by Gulp, Angular, and libsass. It provides you with a basic template to get started with Foundation for Apps and Angular.
+1. Test out the [Foundation for Apps](http://foundation.zurb.com/apps.html) framework in a real app.
+2. Make a todo app that would help me keep track of my weekly assignments, quizzes, and such for ongoing college courses.
 
-If you're already an Angular developer, you may instead want to install the components into your own stack using Bower: `bower install foundation-apps`
+It has all of the makings of a todo app, but it organizes and tracks the data in a way that works better with my personal preference, by sorting the items into the following hierarchy:
 
-## Requirements
+- Terms (e.g. Spring 2015, Summer 2016, etc)
+  - Weeks (e.g. "Summer 2016, week 1")
+     - Courses (e.g. "Uber 1337 JavaScript 101")
 
-You'll need the following software installed to get started.
+So each week will have sub-headers for each course I am currently taking, and a todo item for each task I need to complete for that week. Each has a counter showing incomplete items, and once they are all completed, it is marked as such.
 
-  - [Node.js](http://nodejs.org): Use the installer for your OS.
-  - [Git](http://git-scm.com/downloads): Use the installer for your OS.
-    - Windows users can also try [Git for Windows](http://git-for-windows.github.io/).
-  - [Gulp](http://gulpjs.com/) and [Bower](http://bower.io): Run `npm install -g gulp bower`
-    - Depending on how Node is configured on your machine, you may need to run `sudo npm install -g gulp bower` instead, if you get an error with the first command.
+This was mostly built around my own personal preferences, so it's tough to say if anyone will get any use of it, but you are welcome to do with it as you please. Most of the authentication and CRUD code was written against a Stamplay back-end, so if you choose to try to work with it, you may find the need to re-work some of that code.
 
-## Get Started
+## Technologies Used
 
-Clone this repository, where `app` is the name of your app.
+The primary technology used is [Foundation for Apps](http://foundation.zurb.com/apps.html), which is a pretty hefty framework. Other notable mentions:
 
-```bash
-git clone https://github.com/zurb/foundation-apps-template.git app
-```
+- AngularJS 1.4
+- TypeScript
+- Sass/SCSS
+- Lodash
 
-Change into the directory.
+I also used Stamplay for authentication and database. Rather than using their SDK, I opted to simply write my own calls against their API, which in hindsight was a huge mistake. :)
 
-```bash
-cd app
-```
+## Structure
 
-Install the dependencies. If you're running Mac OS or Linux, you may need to run `sudo npm install` instead, depending on how your machine is configured.
-
-```bash
-npm install
-bower install
-```
-
-While you're working on your project, run:
-
-```bash
-npm start
-```
-
-This will compile the Sass and assemble your Angular app. **Now go to `localhost:8080` in your browser to see it in action.** When you change any file in the `client` folder, the appropriate Gulp task will run to build new files.
-
-To run the compiling process once, without watching any files, use the `build` command.
-
-```bash
-npm start build
-```
+- The primary src directory is `client/assets/js`. It's all TypeScript, but I still use the 'js' directory name out of habit and convention.
+- HTML templates are all in `client/templates`.
+- Everything else should probably be pretty self-explanatory.
