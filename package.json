@@ -6,10 +6,6 @@
     "start": "gulp",
     "build": "gulp build --production"
   },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "author": "Gabe Hargrave",
   "license": "MIT",
   "devDependencies": {
