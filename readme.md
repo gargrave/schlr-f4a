@@ -9,11 +9,13 @@ It has all of the makings of a todo app, but it organizes and tracks the data in
 
 - Terms (e.g. Spring 2015, Summer 2016, etc)
   - Weeks (e.g. "Summer 2016, week 1")
-     - Courses (e.g. "Uber 1337 JavaScript 101")
+    - Courses (e.g. "Uber 1337 JavaScript 101")
 
 So each week will have sub-headers for each course I am currently taking, and a todo item for each task I need to complete for that week. Each has a counter showing incomplete items, and once they are all completed, it is marked as such.
 
 This was mostly built around my own personal preferences, so it's tough to say if anyone will get any use of it, but you are welcome to do with it as you please. Most of the authentication and CRUD code was written against a Stamplay back-end, so if you choose to try to work with it, you may find the need to re-work some of that code.
+
+(And FYI, you may still find some references to my original API in the code, but for what it's worth, none of the URLs or API keys are valid anymore.)
 
 ## Technologies Used
 
