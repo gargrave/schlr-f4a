@@ -5,6 +5,7 @@ bower_components
 build
 dist
 .sass-cache
+stamplay*
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
